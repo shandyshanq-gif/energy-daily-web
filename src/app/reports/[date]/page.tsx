@@ -330,12 +330,12 @@ function SectionRenderer({
 
 // ─── Page Component ───────────────────────────────────────────────────
 
-export default function ReportDetailPage({
+export default async function ReportDetailPage({
   params,
 }: {
-  params: { date: string };
+  params: Promise<{ date: string }>;
 }) {
-  const { date } = params;
+  const { date } = await params;
   const report = getReportByDate(date);
 
   if (!report) {
