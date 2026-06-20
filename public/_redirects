@@ -1,2 +1,0 @@
-# Cloudflare Pages 动态路由支持
-/reports/* /reports/:splat 200
