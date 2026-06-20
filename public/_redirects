@@ -1,0 +1,3 @@
+# Cloudflare Pages - Next.js 动态路由支持
+# 将 /reports/2026-06-20 重定向到 /reports/2026-06-20.html
+/reports/* /reports/:splat.html 200
