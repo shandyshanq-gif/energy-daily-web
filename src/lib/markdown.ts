@@ -153,9 +153,19 @@ export function extractPriceTable(
  * Extract weather data from markdown table
  */
 export function extractWeatherData(markdown: string): WeatherData[] {
-  const weatherSection = markdown.match(
-    /## 🌤️ 核心负荷区天气[\s\S]*?(?=---|## )/
-  );
+  // 尝试多种格式匹配天气板块
+  const patterns = [
+    /## 🌤️ 核心负荷区天气[\s\S]*?(?=---|## )/,
+    /## 天气[\s\S]*?(?=---|## )/,
+    /## 核心负荷区天气[\s\S]*?(?=---|## )/,
+  ];
+
+  let weatherSection: RegExpMatchArray | null = null;
+  for (const pattern of patterns) {
+    weatherSection = markdown.match(pattern);
+    if (weatherSection) break;
+  }
+
   if (!weatherSection) return [];
 
   const lines = weatherSection[0]
@@ -172,9 +182,12 @@ export function extractWeatherData(markdown: string): WeatherData[] {
       .filter((c) => c.trim().length > 0)
       .map((c) => c.trim());
     if (cells.length >= 4) {
-      const tempMatch = cells[2].match(/(\d+)~(\d+)/);
+      // 处理温度格式：支持 🔥 **28~37** 或 23~28 或 N/A
+      const tempStr = cells[2].replace(/[🔥⚡📊✅😴]/g, '').replace(/\*\*/g, '').trim();
+      const tempMatch = tempStr.match(/(\d+)~(\d+)/);
+      const cityClean = cells[0].replace(/[🌴🌊🏙️🌾❄️]/g, '').trim();
       weatherData.push({
-        city: cells[0],
+        city: cityClean,
         weather: cells[1],
         tempLow: tempMatch ? parseInt(tempMatch[1]) : 0,
         tempHigh: tempMatch ? parseInt(tempMatch[2]) : 0,

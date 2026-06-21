@@ -131,11 +131,11 @@ function getSectionMeta(
   if (heading.includes("🌤️") || heading.includes("天气") || heading.includes("负荷区")) {
     return { icon: <CloudSun className="h-5 w-5" />, label: "核心负荷区天气", type: "weather" };
   }
-  if (heading.includes("📊") || heading.includes("关键数据")) {
-    return { icon: <BarChart3 className="h-5 w-5" />, label: "关键数据一览", type: "summary" };
+  if (heading.includes("📊") || heading.includes("综合分析") || heading.includes("关键数据")) {
+    return { icon: <BarChart3 className="h-5 w-5" />, label: "综合分析", type: "cross" };
   }
   if (heading.includes("🔗") || heading.includes("联动")) {
-    return { icon: <Link2 className="h-5 w-5" />, label: "四品种联动", type: "cross" };
+    return { icon: <Link2 className="h-5 w-5" />, label: "综合分析", type: "cross" };
   }
   return { icon: <Newspaper className="h-5 w-5" />, label: heading, type: "text" };
 }
@@ -255,7 +255,7 @@ function SectionRenderer({
     );
   }
 
-  // Summary & Cross sections (关键数据一览, 四品种联动)
+  // Summary & Cross sections (综合分析)
   if (meta.type === "summary" || meta.type === "cross") {
     const priceTables = tables
       .map((t) => extractPriceTable(t))
