@@ -154,10 +154,11 @@ export function extractPriceTable(
  */
 export function extractWeatherData(markdown: string): WeatherData[] {
   // 尝试多种格式匹配天气板块
+  // 使用更灵活的正则，支持带或不带emoji的情况
   const patterns = [
-    /## 🌤️ 核心负荷区天气[\s\S]*?(?=---|## )/,
-    /## 天气[\s\S]*?(?=---|## )/,
-    /## 核心负荷区天气[\s\S]*?(?=---|## )/,
+    /##\s+🌤️?\s*核心负荷区天气[\s\S]*?(?=---|## )/,
+    /##\s+天气[\s\S]*?(?=---|## )/,
+    /##\s+核心负荷区天气[\s\S]*?(?=---|## )/,
   ];
 
   let weatherSection: RegExpMatchArray | null = null;
@@ -206,14 +207,14 @@ export function extractPolicies(
   markdown: string
 ): PolicyItem[] {
   const policySection = markdown.match(
-    /### 🏛️ 政策[\s\S]*?(?=###|## |$)/
+    /### 🏟️ 政策[\s\S]*?(?=###|## |$)/
   );
   if (!policySection) return [];
 
   const policies: PolicyItem[] = [];
-  // Match numbered list items: 1. **Title** — Summary.[来源](url)
+  // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date [来源](url)
   const regex =
-    /\d+\.\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s*\[([^\]]+)\]\(([^)]+)\)/g;
+    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+\d{4}-\d{2}-\d{2}\s*\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = regex.exec(policySection[0])) !== null) {
     policies.push({
@@ -234,13 +235,14 @@ export function extractMarketNews(
   markdown: string
 ): MarketNewsItem[] {
   const newsSection = markdown.match(
-    /### 📰 市场[\s\S]*?(?=###|## |$)/
+    /### 📰 市场动态[\s\S]*?(?=###|## |$)/
   );
   if (!newsSection) return [];
 
   const news: MarketNewsItem[] = [];
+  // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date [来源](url)
   const regex =
-    /\d+\.\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s*\[([^\]]+)\]\(([^)]+)\)/g;
+    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+\d{4}-\d{2}-\d{2}\s*\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = regex.exec(newsSection[0])) !== null) {
     news.push({
