@@ -33,6 +33,25 @@ export default function WeatherGrid({ weatherData }: WeatherGridProps) {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
       {weatherData.map((city, idx) => {
         const isHot = city.tempHigh >= 33;
+        const isExtremeHot = city.tempHigh >= 38;
+        const isHighLoad = city.tempHigh >= 35;
+
+        // 负荷影响标签
+        let loadTag = "";
+        let loadTagColor = "";
+        if (isExtremeHot) {
+          loadTag = "⚠️ 极端高温，负荷飙升";
+          loadTagColor = "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
+        } else if (isHighLoad) {
+          loadTag = "⚡ 空调负荷显著增加";
+          loadTagColor = "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300";
+        } else if (isHot) {
+          loadTag = "📊 负荷中高位运行";
+          loadTagColor = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
+        } else {
+          loadTag = "✅ 正常水平";
+          loadTagColor = "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
+        }
 
         return (
           <div
@@ -72,6 +91,11 @@ export default function WeatherGrid({ weatherData }: WeatherGridProps) {
             <p className="mt-1 text-center text-xs text-gray-400 dark:text-gray-500">
               {city.wind}
             </p>
+
+            {/* Load Impact Tag */}
+            <div className={cn("mt-2 rounded-full px-2 py-0.5 text-center text-[10px] font-medium", loadTagColor)}>
+              {loadTag}
+            </div>
           </div>
         );
       })}
