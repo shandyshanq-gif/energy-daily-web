@@ -156,9 +156,9 @@ export function extractWeatherData(markdown: string): WeatherData[] {
   // 尝试多种格式匹配天气板块
   // 使用更灵活的正则，支持带或不带emoji的情况
   const patterns = [
-    /##\s+🌤️?\s*核心负荷区天气[\s\S]*?(?=---|## )/,
-    /##\s+天气[\s\S]*?(?=---|## )/,
-    /##\s+核心负荷区天气[\s\S]*?(?=---|## )/,
+    /##\s+🌤️?\s*核心负荷区天气[\s\S]+(?=---|## )/,
+    /##\s+天气[\s\S]+(?=---|## )/,
+    /##\s+核心负荷区天气[\s\S]+(?=---|## )/,
   ];
 
   let weatherSection: RegExpMatchArray | null = null;
