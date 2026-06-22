@@ -213,13 +213,14 @@ export function extractPolicies(
 
   const policies: PolicyItem[] = [];
   // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date/time [来源](url)
+  // Support both formats: with summary and without summary
   const regex =
-    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/g;
+    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = regex.exec(policySection[0])) !== null) {
     policies.push({
       title: match[1].trim(),
-      summary: match[2].trim(),
+      summary: match[2].trim() || "暂无摘要",
       source: match[3].trim(),
       sourceUrl: match[4].trim(),
     });
@@ -241,13 +242,14 @@ export function extractMarketNews(
 
   const news: MarketNewsItem[] = [];
   // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date/time [来源](url)
+  // Support both formats: with summary and without summary
   const regex =
-    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/g;
+    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = regex.exec(newsSection[0])) !== null) {
     news.push({
       title: match[1].trim(),
-      summary: match[2].trim(),
+      summary: match[2].trim() || "暂无摘要",
       source: match[3].trim(),
       sourceUrl: match[4].trim(),
     });
