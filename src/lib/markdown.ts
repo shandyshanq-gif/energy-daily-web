@@ -212,9 +212,9 @@ export function extractPolicies(
   if (!policySection) return [];
 
   const policies: PolicyItem[] = [];
-  // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date [来源](url)
+  // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date/time [来源](url)
   const regex =
-    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+\d{4}-\d{2}-\d{2}\s*\[([^\]]+)\]\(([^)]+)\)/g;
+    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = regex.exec(policySection[0])) !== null) {
     policies.push({
@@ -240,9 +240,9 @@ export function extractMarketNews(
   if (!newsSection) return [];
 
   const news: MarketNewsItem[] = [];
-  // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date [来源](url)
+  // Match numbered list items with urgency labels: 1. ⚪ **Title** — Summary date/time [来源](url)
   const regex =
-    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+\d{4}-\d{2}-\d{2}\s*\[([^\]]+)\]\(([^)]+)\)/g;
+    /\d+\.\s+[⚪🟡🔴]\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.+?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = regex.exec(newsSection[0])) !== null) {
     news.push({
