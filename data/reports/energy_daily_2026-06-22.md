@@ -53,17 +53,20 @@
 
 ### 🏟️ 政策
 
-1. 🔴 **四川省发布电力需求侧市场化响应实施方案** — 今日发布，6月16日印发，形成全省最大用电负荷5%的剪峰响应能力 10小时前 [北极星电力网](https://news.bjx.com.cn/html/20260616/1500200.shtml)
+1. 🔴 **重大利好!近期重点光伏政策汇总|风电|电力|新能源|光伏行业|国家能 ...** —  10小时前 [百度搜索](http://www.baidu.com/link?url=eoImDfbWnkzaEgVm2FekRsPP5PKWwHbHunDmWlSRiDhiJRGa3d824aej64kdbbP1Y807mzoFYZjhihvCEI1Vsq)
+2. 🔴 **...新机遇,光伏ETF平安连涨三日引发强烈关注!_市场_高耗能行业_政策** —  10小时前 [百度搜索](http://www.baidu.com/link?url=KkdQhEFe99XWSuzi5cfm3zDSyrDFMapez_EbNiLV_vj6UlUecCW2efPjo_7uZw2e9niNo72_xOUMvzLZT19QYK)
+3. 🔴 **2021年电费调整最新通知:国家是怎样调整的?涨了多少钱一度?|电价格...** —  10小时前 [百度搜索](http://www.baidu.com/link?url=eoImDfbWnkzaEgVm2FekRsPP5PKWwHbHunDmWlSRiDf4uw3Tj_f-OZnO22gUvPk_rcroWWno1Y5qeJIYZIs8_q)
+4. 🔴 **电力市场直接交易2025年最新政策文件** —  10小时前 [百度搜索](http://www.baidu.com/link?url=XSpQHP-R17aIxqq5mEo1-4OSAYn15HjrwJsvlanyutvU49FvBze_KhvKmbRz03A65ngZhux4QvHS87IgRujyUKrqxDi_-L_cPayS9Y_XtDKnG8QTyQ0GilhebngR68tw)
 
 ### 📰 市场动态
 
-> 暂无48小时内的重要市场动态
+1. 🔴 **多地顶格上调尖峰电价,国办要求加强用电保障提高中小企业承受力...** —  10小时前 [百度搜索](http://www.baidu.com/link?url=7vlcWyJonwDVAC3Grno5XCvM-uvOAxr5wfybnw4AlGCSnvZfyNnFsr4zCVGHVpPhFz8rJh7qwYVnjFXQ3FxTMK)
 
 
 
 ---
 ## 🌤️ 核心负荷区天气
-> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-06-22 10:13
+> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-06-22 10:20
 
 | 城市 | 天气 | 气温(℃) | 风向风力 | 负荷影响 |
 |:-----|:-----|:--------|:---------|:---------|
@@ -91,4 +94,4 @@
 
 ---
 *免责声明：本日报仅提供数据信息与物理逻辑推演，不构成任何业务建议或交易策略。*
-*生成时间：2026-06-22 10:13 · fetch v4.0 / report v5.0*
+*生成时间：2026-06-22 10:20 · fetch v4.0 / report v5.0*
