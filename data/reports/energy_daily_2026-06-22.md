@@ -57,14 +57,17 @@
 
 ### 📰 市场动态
 
-1. 🔴 **国家能源局举行新闻发布会介绍2025年全国电力市场交易成效---国家...** —  11小时前 [baidu](http://www.baidu.com/link?url=T6b8ZkW0xXMFH5k-9YVVvC60FjqZRYqLmyEDI1SIw7tS2JZnxPEOk16RT_x-juRLWdqtxfMp2fbr7jUObIdY81qJQhr8_KFSFsIScHKLUDuH9-ATUpIhWwnRyXKeLwIf)
-2. 🔴 **南方电网经营区域2025年市场交易规模突破1.2万亿千瓦时---国家能源局...** —  11小时前 [baidu](http://www.baidu.com/link?url=T6b8ZkW0xXMFH5k-9YVVvC60FjqZRYqLmyEDI1SIw7tS2JZnxPEOk16RT_x-juRLaweolT391UXIFoGdiKJezDMtJOtZ6fOtQDCr8B5AODNqLnCC8AOqffosSpQCUg5-)
+1. 🔴 **电力交易-北极星电力市场网 - bjx.com.cn** — 4 天之前 · 北极星电力市场网为您提供最新电力市场电力交易动态，电力市场电力交易新闻资讯，电力市场电力交易报道等内容，帮您 … 12小时前 [bing](https://shoudian.bjx.com.cn/dljy/)
+2. 🔴 **电力交易-北极星电力市场网 - bjx.com.cn** — 4 天之前 · 北极星电力市场网为您提供最新电力市场电力交易动态，电力市场电力交易新闻资讯，电力市场电力交易报道等内容，帮您了解电力市场电力交易相关信息。 12小时前 [bing](https://shoudian.bjx.com.cn/dljy/)
+3. 🔴 **浙江拟调整2024年电力市场化交易政策-北极星电力市场网** —  12小时前 [sogou](/link?url=hedJjaC291MzQfXru4l8gydQRoztLvNXnI1dn3Sb8O26gf603GTg9FrmVMb5IroftsCnpVGpPpA.)
+4. 🔴 **电力市场监管办法_政府信息公开_政务公开-国家发展改革委** —  12小时前 [baidu](http://www.baidu.com/link?url=JJc24FA0YuE1GXFGhg6mo2f7b6xCeQyWjLyRGGWdn4Tzoc-lANr3ilVPlsnlh06HgGuO3NRUQGWXLngFU6sihq)
+5. 🔴 **电力市场政策-北极星电力新闻网** —  12小时前 [baidu](http://www.baidu.com/link?url=-22Ykj2jxw-YW3j4mk7oEjeyAW0H6O2KFVGrK0fYGV59Ca3e3n_rCCQIdcuzxmPn)
 
 
 
 ---
 ## 🌤️ 核心负荷区天气
-> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-06-22 11:00
+> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-06-22 12:08
 
 | 城市 | 天气 | 气温(℃) | 风向风力 | 负荷影响 |
 |:-----|:-----|:--------|:---------|:---------|
@@ -92,4 +95,4 @@
 
 ---
 *免责声明：本日报仅提供数据信息与物理逻辑推演，不构成任何业务建议或交易策略。*
-*生成时间：2026-06-22 11:00 · fetch v4.0 / report v5.0*
+*生成时间：2026-06-22 12:08 · fetch v4.0 / report v5.0*
