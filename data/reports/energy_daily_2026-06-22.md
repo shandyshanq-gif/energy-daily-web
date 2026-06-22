@@ -1,15 +1,15 @@
 # 📊 一次能源·电力市场联合日报
 > **2026年6月22日 星期一** · 交易员3分钟速览 · 煤油气电 + 负荷天气
-> 数据来源: TradingEconomics / SHPGX / CMA 气象 | 抓取时间: 2026-06-22 10:13
+> 数据来源: TradingEconomics / SHPGX / CMA 气象 | 抓取时间: 2026-06-22 10:20
 
 ---
 ## 🛢️ 原油
 | 品种 | 价格(美元/棶) | 日涨跌 | 月涨跌 | 同比 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:-----|:-------|:------|
-| WTI | **75.49** | ↓ -2.38% | -19.59% | 10.19% | 2026-06-22 | [TradingEconomics](https://tradingeconomics.com/commodity/crude-oil) |
-| Brent | **79.21** | ↓ -1.71% | -18.06% | 10.82% | 2026-06-22 | [TradingEconomics](https://tradingeconomics.com/commodity/brent-crude-oil) |
+| WTI | **75.54** | ↓ -2.32% | -19.54% | 10.26% | 2026-06-22 | [TradingEconomics](https://tradingeconomics.com/commodity/crude-oil) |
+| Brent | **79.27** | ↓ -1.64% | -18.00% | 10.89% | 2026-06-22 | [TradingEconomics](https://tradingeconomics.com/commodity/brent-crude-oil) |
 
-> 📝 **点评**: WTI报75.49美元/棶，下跌-2.38%。Brent-WTI价差约3.72美元，月内累计跌幅显著。原油价位中性运行，对火电成本影响有限。
+> 📝 **点评**: WTI报75.54美元/棶，下跌-2.32%。Brent-WTI价差约3.73美元，月内累计跌幅显著。原油价位中性运行，对火电成本影响有限。
 
 ---
 ## 🔥 天然气 / LNG
@@ -53,14 +53,13 @@
 
 ### 🏟️ 政策
 
-1. 🔴 **重大利好!近期重点光伏政策汇总|风电|电力|新能源|光伏行业|国家能 ...** —  10小时前 [百度搜索](http://www.baidu.com/link?url=eoImDfbWnkzaEgVm2FekRsPP5PKWwHbHunDmWlSRiDhiJRGa3d824aej64kdbbP1Y807mzoFYZjhihvCEI1Vsq)
-2. 🔴 **...新机遇,光伏ETF平安连涨三日引发强烈关注!_市场_高耗能行业_政策** —  10小时前 [百度搜索](http://www.baidu.com/link?url=KkdQhEFe99XWSuzi5cfm3zDSyrDFMapez_EbNiLV_vj6UlUecCW2efPjo_7uZw2e9niNo72_xOUMvzLZT19QYK)
-3. 🔴 **2021年电费调整最新通知:国家是怎样调整的?涨了多少钱一度?|电价格...** —  10小时前 [百度搜索](http://www.baidu.com/link?url=eoImDfbWnkzaEgVm2FekRsPP5PKWwHbHunDmWlSRiDf4uw3Tj_f-OZnO22gUvPk_rcroWWno1Y5qeJIYZIs8_q)
-4. 🔴 **电力市场直接交易2025年最新政策文件** —  10小时前 [百度搜索](http://www.baidu.com/link?url=XSpQHP-R17aIxqq5mEo1-4OSAYn15HjrwJsvlanyutvU49FvBze_KhvKmbRz03A65ngZhux4QvHS87IgRujyUKrqxDi_-L_cPayS9Y_XtDKnG8QTyQ0GilhebngR68tw)
+1. 🔴 **江西省关于2026年规范电力零售市场价格有关事项的通知** — 加强政策宣贯，做好电力交易平台功能优化部署，统一下架售电公司已上架的全部零售套餐 10小时前 [江西省发改委](https://drc.jiangxi.gov.cn/jxsfzhggwyh/col/col14590/content/content_2048939572355665920.html)
 
 ### 📰 市场动态
 
-1. 🔴 **多地顶格上调尖峰电价,国办要求加强用电保障提高中小企业承受力...** —  10小时前 [百度搜索](http://www.baidu.com/link?url=7vlcWyJonwDVAC3Grno5XCvM-uvOAxr5wfybnw4AlGCSnvZfyNnFsr4zCVGHVpPhFz8rJh7qwYVnjFXQ3FxTMK)
+1. 🔴 **2026年6月电网代理购电价格解析——系统运行费增项背后的电价机制** — 通过可靠容量补偿机制实现容量价值的市场化定价，四类调节性电源的差异化管理体现了政策的精准性 10小时前 [百度百家号](http://baijiahao.baidu.com/s?id=1867425220368832500)
+2. 🔴 **各地2026年6月代理购电价表已经公布** — 「储能与电力市场」获悉，各地2026年6月代理购电价表已经公布，代理购电价普遍下降 10小时前 [雪球](https://xueqiu.com/8524676271/392053819)
+3. 🔴 **2026年6月工商业电力客户代理购电价格公告** — 2026年6月工商业电力客户代理购电价格公告发布 10小时前 [澎湃新闻](https://www.thepaper.cn/newsDetail_forward_33276568)
 
 
 
@@ -72,13 +71,13 @@
 |:-----|:-----|:--------|:---------|:---------|
 | 🌴 福州 | 晴 | 🔥 **27~37** | 无持续风 | ⚡ 空调负荷显著增加 |
 | 🌴 南宁 | 小雨 | 24~31 | 无持续风 | ✅ 正常水平 |
-| 🌴 广州 | 晴 | 🔥 **27~35** | 无持续风 | ⚡ 空调负荷显著增加 |
 | 🌊 杭州 | 中雨 | **22~33** | 西北风 | 📊 负荷中高位运行 |
+| 🌴 广州 | 晴 | 🔥 **27~35** | 无持续风 | ⚡ 空调负荷显著增加 |
 | 🌴 海口 | 晴 | 🔥 **28~37** | 无持续风 | ⚡ 空调负荷显著增加 |
-| 🌊 济南 | 晴 | 22~31 | 南风 | ✅ 正常水平 |
-| 🌊 南京 | 大雨 | 21~25 | 东北风 | 😴 低负荷 |
-| 🏙️ 北京 | 多云 | 20~31 | 南风 | ✅ 正常水平 |
 | 🌾 石家庄 | 晴 | **21~33** | 南风 | 📊 负荷中高位运行 |
+| 🌊 南京 | 大雨 | 21~25 | 东北风 | 😴 低负荷 |
+| 🌊 济南 | 晴 | 22~31 | 南风 | ✅ 正常水平 |
+| 🏙️ 北京 | 多云 | 20~31 | 南风 | ✅ 正常水平 |
 | ❄️ 沈阳 | 晴 | 16~31 | 南风 | ✅ 正常水平 |
 
 [查看全国降水图](http://www.nmc.cn/publish/precipitation/1-day.html)
