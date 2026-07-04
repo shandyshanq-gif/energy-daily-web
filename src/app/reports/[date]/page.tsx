@@ -28,10 +28,11 @@ import {
   type PolicyItem,
   type MarketNewsItem,
 } from "@/lib/markdown";
-import PriceTable from "@/components/PriceTable";
-import WeatherGrid from "@/components/WeatherGrid";
-import PolicySection from "@/components/PolicySection";
-import ReportNav from "@/components/ReportNav";
+import PriceTable from "@/components/report/PriceTable";
+import WeatherGrid from "@/components/report/WeatherGrid";
+import PolicySection from "@/components/report/PolicySection";
+import ReportNav from "@/components/report/ReportNav";
+import ReportHeader from "@/components/report/ReportHeader";
 
 // ─── Static generation ────────────────────────────────────────────────
 export async function generateStaticParams() {
@@ -382,17 +383,7 @@ export default async function ReportDetailPage({
 
       <main id="main-content" className="mx-auto max-w-5xl px-4 sm:px-6 py-8">
         {/* Report title block */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            {report.meta.title}
-          </h1>
-          <p className="mt-2 text-base text-muted-foreground">
-            {dateLine || `${formatDate(date)} 星期${report.meta.weekday}`}
-          </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            交易员3分钟速览 · 煤油气电 + 负荷天气
-          </p>
-        </div>
+        <ReportHeader date={date} weekday={report.meta.weekday} />
 
         {/* Report sections */}
         <div className="space-y-10">

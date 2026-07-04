@@ -7,20 +7,13 @@ import {
   BarChart3,
   FileText,
 } from "lucide-react";
-import { getAllReports, getLatestReport } from "@/lib/reports";
+import { getAllReports } from "@/lib/reports";
 import { extractDateLine, extractSubtitle } from "@/lib/markdown";
-
-function formatDate(date: string): string {
-  const d = new Date(date);
-  const y = d.getFullYear();
-  const m = d.getMonth() + 1;
-  const day = d.getDate();
-  return `${y}年${m}月${day}日`;
-}
+import { formatDate } from "@/lib/utils";
 
 export default function HomePage() {
-  const latest = getLatestReport();
   const allReports = getAllReports();
+  const latest = allReports.length > 0 ? { meta: allReports[0], content: "" } : null;
 
   // Recent 10 reports (excluding the latest since we show it as featured)
   const recentReports = latest ? allReports.filter((r) => r.date !== latest.meta.date).slice(0, 9) : allReports.slice(0, 10);

@@ -1,0 +1,26 @@
+[
+  {
+    "symbol": "WTI",
+    "price": 77.33,
+    "daily_change": "0.96%",
+    "monthly_change": "-21.30%",
+    "yoy_change": "4.73%",
+    "date": "2026-06-21",
+    "source": "TradingEconomics",
+    "url": "https://tradingeconomics.com/commodity/crude-oil",
+    "unit": "USD/barrel",
+    "_fetch_level": 1
+  },
+  {
+    "symbol": "Brent",
+    "price": 80.59,
+    "daily_change": "0.93%",
+    "monthly_change": "-23.26%",
+    "yoy_change": "4.65%",
+    "date": "2026-06-21",
+    "source": "TradingEconomics",
+    "url": "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "unit": "USD/barrel",
+    "_fetch_level": 1
+  }
+]

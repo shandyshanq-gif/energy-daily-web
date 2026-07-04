@@ -1,0 +1,13 @@
+{
+  "name": "动力煤(Q5500)",
+  "price_usd": 144.0,
+  "price": 1044,
+  "price_unit": "元/吨",
+  "daily_change": "0%",
+  "monthly_change": "8.72%",
+  "date": "2026-06-21",
+  "source": "TradingEconomics",
+  "url": "https://tradingeconomics.com/commodity/coal",
+  "note": "参考汇率 1 USD = 7.25 CNY",
+  "_fetch_level": 1
+}

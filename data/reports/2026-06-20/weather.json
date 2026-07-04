@@ -1,0 +1,92 @@
+[
+  {
+    "city": "广州",
+    "region": "华南",
+    "weather": "晴",
+    "temp_low": 27,
+    "temp_high": 34,
+    "wind": "无持续风",
+    "station_id": "59287"
+  },
+  {
+    "city": "杭州",
+    "region": "华东",
+    "weather": "中雨",
+    "temp_low": 23,
+    "temp_high": 28,
+    "wind": "东风",
+    "station_id": "58457"
+  },
+  {
+    "city": "南宁",
+    "region": "华南",
+    "weather": "小雨",
+    "temp_low": 24,
+    "temp_high": 31,
+    "wind": "无持续风",
+    "station_id": "59432"
+  },
+  {
+    "city": "福州",
+    "region": "华南",
+    "weather": "晴",
+    "temp_low": 28,
+    "temp_high": 37,
+    "wind": "无持续风",
+    "station_id": "58847"
+  },
+  {
+    "city": "海口",
+    "region": "华南",
+    "weather": "晴",
+    "temp_low": 26,
+    "temp_high": 36,
+    "wind": "无持续风",
+    "station_id": "59758"
+  },
+  {
+    "city": "南京",
+    "region": "华东",
+    "weather": "小雨",
+    "temp_low": 22,
+    "temp_high": 28,
+    "wind": "东风",
+    "station_id": "58238"
+  },
+  {
+    "city": "石家庄",
+    "region": "华北",
+    "weather": "晴",
+    "temp_low": 18,
+    "temp_high": 29,
+    "wind": "南风",
+    "station_id": "53698"
+  },
+  {
+    "city": "济南",
+    "region": "华东",
+    "weather": "晴",
+    "temp_low": 21,
+    "temp_high": 29,
+    "wind": "北风",
+    "station_id": "54823"
+  },
+  {
+    "city": "北京",
+    "region": "京津",
+    "weather": "晴",
+    "temp_low": 17,
+    "temp_high": 29,
+    "wind": "南风",
+    "station_id": "54511"
+  },
+  {
+    "city": "沈阳",
+    "region": "东北",
+    "weather": "晴",
+    "temp_low": 15,
+    "temp_high": 28,
+    "wind": "西风",
+    "station_id": "54342"
+  }
+]

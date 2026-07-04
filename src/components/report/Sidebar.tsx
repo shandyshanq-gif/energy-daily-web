@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, ChevronDown, ChevronRight, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import type { ReportMeta } from "@/types/report";
 
 interface SidebarProps {

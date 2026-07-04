@@ -1,18 +1,18 @@
-import fs from "fs";
-import path from "path";
+import type { ReportMeta, Report, ReportSection } from "@/types/report";
 
-export interface ReportMeta {
-  date: string; // YYYY-MM-DD
-  title: string;
-  weekday: string;
+// 检查是否在服务器端环境
+const isServer = typeof window === "undefined";
+
+// 只有在服务器端才导入fs和path模块
+let fs: any;
+let path: any;
+let REPORTS_DIR: string = "";
+
+if (isServer) {
+  fs = require("fs");
+  path = require("path");
+  REPORTS_DIR = path.join(process.cwd(), "data/reports");
 }
-
-export interface ReportData {
-  meta: ReportMeta;
-  content: string; // raw markdown
-}
-
-const REPORTS_DIR = path.join(process.cwd(), "data/reports");
 
 const WEEKDAY_NAMES = ["日", "一", "二", "三", "四", "五", "六"];
 
@@ -37,6 +37,12 @@ function getWeekday(dateStr: string): string {
 }
 
 export function getAllReports(): ReportMeta[] {
+  // 如果在客户端环境，返回示例数据
+  if (!isServer) {
+    return getSampleReports();
+  }
+
+  // 服务器端：从文件系统读取
   if (!fs.existsSync(REPORTS_DIR)) return [];
 
   const files = fs.readdirSync(REPORTS_DIR);
@@ -57,6 +63,8 @@ export function getAllReports(): ReportMeta[] {
       date,
       title: `一次能源·电力市场联合日报`,
       weekday: getWeekday(date),
+      createdAt: fs.statSync(filePath).birthtime.toISOString(),
+      updatedAt: fs.statSync(filePath).mtime.toISOString(),
     });
   }
 
@@ -65,7 +73,13 @@ export function getAllReports(): ReportMeta[] {
   return reports;
 }
 
-export function getReportByDate(date: string): ReportData | null {
+export function getReportByDate(date: string): Report | null {
+  // 如果在客户端环境，返回示例数据
+  if (!isServer) {
+    return getSampleReportByDate(date);
+  }
+
+  // 服务器端：从文件系统读取
   // Try exact filename first
   let filePath = path.join(REPORTS_DIR, `energy_daily_${date}.md`);
 
@@ -87,17 +101,23 @@ export function getReportByDate(date: string): ReportData | null {
   const content = fs.readFileSync(filePath, "utf-8");
   const titleDate = parseTitleDate(content) || date;
 
+  // Extract sections from markdown
+  const sections = extractSections(content);
+
   return {
     meta: {
       date: titleDate,
       title: "一次能源·电力市场联合日报",
       weekday: getWeekday(titleDate),
+      createdAt: fs.statSync(filePath).birthtime.toISOString(),
+      updatedAt: fs.statSync(filePath).mtime.toISOString(),
     },
     content,
+    sections,
   };
 }
 
-export function getLatestReport(): ReportData | null {
+export function getLatestReport(): Report | null {
   const all = getAllReports();
   if (all.length === 0) return null;
   return getReportByDate(all[0].date);
@@ -114,5 +134,79 @@ export function getAdjacentDates(date: string): {
   return {
     prev: idx < dates.length - 1 ? dates[idx + 1] : null,
     next: idx > 0 ? dates[idx - 1] : null,
+  };
+}
+
+function extractSections(content: string): ReportSection[] {
+  const sections: ReportSection[] = [];
+  const lines = content.split('\n');
+  let currentSection: ReportSection | null = null;
+
+  for (const line of lines) {
+    // Check for section headers (## or ###)
+    const headerMatch = line.match(/^#{2,3}\s+(.+)/);
+    if (headerMatch) {
+      if (currentSection) {
+        sections.push(currentSection);
+      }
+      currentSection = {
+        id: headerMatch[1].toLowerCase().replace(/\s+/g, '-'),
+        title: headerMatch[1],
+        content: '',
+        type: 'text',
+      };
+    } else if (currentSection) {
+      currentSection.content += line + '\n';
+      // Detect table content
+      if (line.includes('|') && line.includes('---')) {
+        currentSection.type = 'table';
+      }
+    }
+  }
+
+  if (currentSection) {
+    sections.push(currentSection);
+  }
+
+  return sections;
+}
+
+// 客户端示例数据
+function getSampleReports(): ReportMeta[] {
+  const now = new Date();
+  const reports: ReportMeta[] = [];
+  
+  // 生成最近7天的示例数据
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(now);
+    date.setDate(date.getDate() - i);
+    const dateStr = date.toISOString().split('T')[0];
+    const weekday = ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
+    
+    reports.push({
+      date: dateStr,
+      title: "一次能源·电力市场联合日报",
+      weekday,
+      createdAt: date.toISOString(),
+      updatedAt: date.toISOString(),
+    });
+  }
+  
+  return reports;
+}
+
+function getSampleReportByDate(date: string): Report | null {
+  const weekday = ['日', '一', '二', '三', '四', '五', '六'][new Date(date).getDay()];
+  
+  return {
+    meta: {
+      date,
+      title: "一次能源·电力市场联合日报",
+      weekday,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    content: `# 一次能源·电力市场联合日报\n\n**${date} 星期${weekday}**\n\n交易员3分钟速览 · 煤油气电 + 负荷天气`,
+    sections: [],
   };
 }
