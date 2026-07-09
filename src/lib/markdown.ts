@@ -212,12 +212,16 @@ export function extractPolicies(
   if (!policySection) return [];
 
   const policies: PolicyItem[] = [];
-  // Match numbered list items with urgency labels: 1. 🔴 **Title** — Summary date/time [来源](url)
-  // Support both formats: with summary and without summary
+  // Match numbered list items with urgency labels: 1. 🔴 **Title** — Summary [time pattern] [来源](url)
+  // 支持多种时间格式：
+  //   - "YYYY-MM-DD"  （仅有日期）
+  //   - "X小时前"     （仅有相对时间）
+  //   - "发布时间：YYYY-MM-DD HH:MM（X小时前）"  （新格式：同时含绝对+相对时间）
+  //   - "发布时间：YYYY-MM-DD（X小时前）"        （新格式：无时分秒）
   // IMPORTANT: Use \p{Emoji_Presentation} with u flag instead of [⚪🟡🔴] character class
   // because JavaScript regex engine has compatibility issues with surrogate-pair emoji in character classes
   const regex =
-    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
+    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
   let match;
   while ((match = regex.exec(policySection[0])) !== null) {
     policies.push({
@@ -243,12 +247,16 @@ export function extractMarketNews(
   if (!newsSection) return [];
 
   const news: MarketNewsItem[] = [];
-  // Match numbered list items with urgency labels: 1. 🔴 **Title** — Summary date/time [来源](url)
-  // Support both formats: with summary and without summary
+  // Match numbered list items with urgency labels: 1. 🔴 **Title** — Summary [time pattern] [来源](url)
+  // 支持多种时间格式：
+  //   - "YYYY-MM-DD"  （仅有日期）
+  //   - "X小时前"     （仅有相对时间）
+  //   - "发布时间：YYYY-MM-DD HH:MM（X小时前）"  （新格式：同时含绝对+相对时间）
+  //   - "发布时间：YYYY-MM-DD（X小时前）"        （新格式：无时分秒）
   // IMPORTANT: Use \p{Emoji_Presentation} with u flag instead of [⚪🟡🔴] character class
   // because JavaScript regex engine has compatibility issues with surrogate-pair emoji in character classes
   const regex =
-    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:\d{4}-\d{2}-\d{2}|\d+小时前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
+    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
   let match;
   while ((match = regex.exec(newsSection[0])) !== null) {
     news.push({
