@@ -1,0 +1,327 @@
+{
+  "fetch_time": "2026-07-10 08:46",
+  "fetch_version": "6.0.0",
+  "date": "2026-07-10",
+  "crude": [
+    {
+      "symbol": "WTI",
+      "price": 71.97,
+      "daily_change": "-0.16%",
+      "monthly_change": "-17.95%",
+      "yoy_change": "5.14%",
+      "date": "2026-07-10",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/crude-oil",
+      "unit": "USD/barrel"
+    },
+    {
+      "symbol": "Brent",
+      "price": 76.08,
+      "daily_change": "-0.29%",
+      "monthly_change": "-15.82%",
+      "yoy_change": "8.13%",
+      "date": "2026-07-10",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/brent-crude-oil",
+      "unit": "USD/barrel"
+    }
+  ],
+  "jkm": {
+    "price": 16.58,
+    "daily_change": "0.39%",
+    "monthly_change": "-12.37%",
+    "date": "2026-07-10",
+    "source": "TradingEconomics",
+    "url": "https://zh.tradingeconomics.com/commodity/liquefied-natural-gas-japan-korea",
+    "unit": "USD/MMBtu"
+  },
+  "coal": [
+    {
+      "name": "CCTD综合交易5500",
+      "price": 727.0,
+      "price_unit": "元/吨",
+      "price_type": "平仓价",
+      "daily_change": "+1.0",
+      "monthly_change": null,
+      "date": "2026-07-03",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "CCTD现货交易5000",
+      "price": 745.0,
+      "price_unit": "元/吨",
+      "price_type": "平仓价",
+      "daily_change": "-23.0",
+      "monthly_change": null,
+      "date": "2026-07-03",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "山西5500",
+      "price": 699.0,
+      "price_unit": "元/吨",
+      "price_type": "坑口价",
+      "daily_change": "+53.0",
+      "monthly_change": null,
+      "date": "2026-06-01",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "陕西5500",
+      "price": 619.0,
+      "price_unit": "元/吨",
+      "price_type": "坑口价",
+      "daily_change": "+45.0",
+      "monthly_change": null,
+      "date": "2026-06-01",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "蒙西5500",
+      "price": 599.0,
+      "price_unit": "元/吨",
+      "price_type": "坑口价",
+      "daily_change": "+37.0",
+      "monthly_change": null,
+      "date": "2026-06-01",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "蒙东3500",
+      "price": 308.0,
+      "price_unit": "元/吨",
+      "price_type": "坑口价",
+      "daily_change": "0",
+      "monthly_change": null,
+      "date": "2026-06-01",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "延安气精煤",
+      "price": 1133.0,
+      "price_unit": "元/吨",
+      "price_type": "出厂价",
+      "daily_change": "-31.0",
+      "monthly_change": null,
+      "date": "2026-07-08",
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    }
+  ],
+  "weather": [
+    {
+      "city": "杭州",
+      "region": "华东",
+      "weather": "晴",
+      "temp_low": 27,
+      "temp_high": 36,
+      "wind": "西南风",
+      "station_id": "58457"
+    },
+    {
+      "city": "福州",
+      "region": "华南",
+      "weather": "晴",
+      "temp_low": 28,
+      "temp_high": 37,
+      "wind": "无持续风",
+      "station_id": "58847"
+    },
+    {
+      "city": "南宁",
+      "region": "华南",
+      "weather": "小雨",
+      "temp_low": 24,
+      "temp_high": 31,
+      "wind": "无持续风",
+      "station_id": "59432"
+    },
+    {
+      "city": "广州",
+      "region": "华南",
+      "weather": "大雨",
+      "temp_low": 24,
+      "temp_high": 30,
+      "wind": "无持续风",
+      "station_id": "59287"
+    },
+    {
+      "city": "海口",
+      "region": "华南",
+      "weather": "中雨",
+      "temp_low": 26,
+      "temp_high": 31,
+      "wind": "无持续风",
+      "station_id": "59758"
+    },
+    {
+      "city": "南京",
+      "region": "华东",
+      "weather": "小雨",
+      "temp_low": 24,
+      "temp_high": 32,
+      "wind": "南风",
+      "station_id": "58238"
+    },
+    {
+      "city": "北京",
+      "region": "京津",
+      "weather": "多云",
+      "temp_low": 22,
+      "temp_high": 31,
+      "wind": "东风",
+      "station_id": "54511"
+    },
+    {
+      "city": "沈阳",
+      "region": "东北",
+      "weather": "多云",
+      "temp_low": 22,
+      "temp_high": 30,
+      "wind": "南风",
+      "station_id": "54342"
+    },
+    {
+      "city": "石家庄",
+      "region": "华北",
+      "weather": "晴",
+      "temp_low": 23,
+      "temp_high": 33,
+      "wind": "南风",
+      "station_id": "53698"
+    },
+    {
+      "city": "济南",
+      "region": "华东",
+      "weather": "多云",
+      "temp_low": 22,
+      "temp_high": 31,
+      "wind": "东北风",
+      "station_id": "54823"
+    }
+  ],
+  "lng": {
+    "national": {
+      "price": 5819.0,
+      "date": "2026-07-09"
+    },
+    "regions": [
+      {
+        "name": "内蒙古",
+        "price": 5419.0,
+        "cd": "8"
+      },
+      {
+        "name": "陕西",
+        "price": 5362.0,
+        "cd": "9"
+      },
+      {
+        "name": "广东",
+        "price": 6365.0,
+        "cd": "10"
+      },
+      {
+        "name": "山西",
+        "price": 5425.0,
+        "cd": "11"
+      },
+      {
+        "name": "福建",
+        "price": 6175.0,
+        "cd": "12"
+      },
+      {
+        "name": "新疆",
+        "price": null,
+        "cd": "13"
+      },
+      {
+        "name": "山东",
+        "price": 5769.0,
+        "cd": "14"
+      },
+      {
+        "name": "京津冀",
+        "price": 5540.0,
+        "cd": "15"
+      },
+      {
+        "name": "江苏",
+        "price": 6070.0,
+        "cd": "16"
+      },
+      {
+        "name": "四川",
+        "price": 5636.0,
+        "cd": "17"
+      },
+      {
+        "name": "东北",
+        "price": 5635.0,
+        "cd": "18"
+      },
+      {
+        "name": "大连市(中石油)",
+        "price": 5850.0,
+        "cd": "42"
+      },
+      {
+        "name": "浙江",
+        "price": 6088.0,
+        "cd": "19"
+      },
+      {
+        "name": "河南",
+        "price": 5609.0,
+        "cd": "20"
+      },
+      {
+        "name": "宁夏",
+        "price": 5470.0,
+        "cd": "21"
+      },
+      {
+        "name": "海南",
+        "price": 5763.0,
+        "cd": "27"
+      }
+    ],
+    "date": "2026-07-09",
+    "source": "SHPGX上海石油天然气交易所",
+    "url": "https://www.shpgx.com/marketzhishu/list/3/22",
+    "regional_url": "https://www.shpgx.com/marketzhishu/map",
+    "_fetch_level": 1
+  },
+  "power_market": {
+    "error": "All fetch levels failed"
+  },
+  "validation_report": {
+    "passed": [
+      "原油: 2 条有效数据",
+      "JKM: 价格 16.58 有效",
+      "煤炭: 7 个有效品种",
+      "天气: 10 个有效城市",
+      "LNG: 全国均价 5819.0 有效"
+    ],
+    "warnings": [
+      "电力市场: 数据缺失或为空"
+    ],
+    "errors": [],
+    "summary": {
+      "crude": "2/2 entries OK",
+      "jkm": "OK (price=16.58)",
+      "coal": "7/7 varieties OK",
+      "weather": "10/10 cities OK",
+      "lng": "OK (national=5819.0)",
+      "lng_regions": "16 regions"
+    },
+    "overall_score": 83.3
+  }
+}
