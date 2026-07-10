@@ -20,6 +20,7 @@ export interface PolicyItem {
   summary: string;
   source: string;
   sourceUrl: string;
+  publishTime?: string;
 }
 
 export interface MarketNewsItem {
@@ -27,6 +28,7 @@ export interface MarketNewsItem {
   summary: string;
   source: string;
   sourceUrl: string;
+  publishTime?: string;
 }
 
 export interface WeatherData {
@@ -213,22 +215,20 @@ export function extractPolicies(
 
   const policies: PolicyItem[] = [];
   // Match numbered list items with urgency labels: 1. 🔴 **Title** — Summary [time pattern] [来源](url)
-  // 支持多种时间格式：
-  //   - "YYYY-MM-DD"  （仅有日期）
-  //   - "X小时前"     （仅有相对时间）
-  //   - "发布时间：YYYY-MM-DD HH:MM（X小时前）"  （新格式：同时含绝对+相对时间）
-  //   - "发布时间：YYYY-MM-DD（X小时前）"        （新格式：无时分秒）
+  // 支持多种时间格式，并提取发布时间文本
+  // 捕获组: [1]=title, [2]=summary, [3]=timeText, [4]=source, [5]=sourceUrl
   // IMPORTANT: Use \p{Emoji_Presentation} with u flag instead of [⚪🟡🔴] character class
   // because JavaScript regex engine has compatibility issues with surrogate-pair emoji in character classes
   const regex =
-    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
+    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
   let match;
   while ((match = regex.exec(policySection[0])) !== null) {
     policies.push({
       title: match[1].trim(),
       summary: match[2].trim() || "暂无摘要",
-      source: match[3].trim(),
-      sourceUrl: match[4].trim(),
+      source: match[4].trim(),
+      sourceUrl: match[5].trim(),
+      publishTime: match[3] ? match[3].trim() : undefined,
     });
   }
 
@@ -248,22 +248,20 @@ export function extractMarketNews(
 
   const news: MarketNewsItem[] = [];
   // Match numbered list items with urgency labels: 1. 🔴 **Title** — Summary [time pattern] [来源](url)
-  // 支持多种时间格式：
-  //   - "YYYY-MM-DD"  （仅有日期）
-  //   - "X小时前"     （仅有相对时间）
-  //   - "发布时间：YYYY-MM-DD HH:MM（X小时前）"  （新格式：同时含绝对+相对时间）
-  //   - "发布时间：YYYY-MM-DD（X小时前）"        （新格式：无时分秒）
+  // 支持多种时间格式，并提取发布时间文本
+  // 捕获组: [1]=title, [2]=summary, [3]=timeText, [4]=source, [5]=sourceUrl
   // IMPORTANT: Use \p{Emoji_Presentation} with u flag instead of [⚪🟡🔴] character class
   // because JavaScript regex engine has compatibility issues with surrogate-pair emoji in character classes
   const regex =
-    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(?:发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
+    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
   let match;
   while ((match = regex.exec(newsSection[0])) !== null) {
     news.push({
       title: match[1].trim(),
       summary: match[2].trim() || "暂无摘要",
-      source: match[3].trim(),
-      sourceUrl: match[4].trim(),
+      source: match[4].trim(),
+      sourceUrl: match[5].trim(),
+      publishTime: match[3] ? match[3].trim() : undefined,
     });
   }
 

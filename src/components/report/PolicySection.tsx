@@ -6,6 +6,7 @@ interface PolicyItem {
   summary: string;
   source: string;
   sourceUrl: string;
+  publishTime?: string;
 }
 
 interface MarketNewsItem {
@@ -13,6 +14,7 @@ interface MarketNewsItem {
   summary: string;
   source: string;
   sourceUrl: string;
+  publishTime?: string;
 }
 
 interface PolicySectionProps {
@@ -59,6 +61,12 @@ export default function PolicySection({ policies, news }: PolicySectionProps) {
                     </div>
                     <div className="mt-1 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                       <span>{policy.source}</span>
+                      {policy.publishTime && (
+                        <>
+                          <span className="text-gray-300 dark:text-gray-600">·</span>
+                          <span>{policy.publishTime}</span>
+                        </>
+                      )}
                     </div>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
                       {policy.summary}
@@ -103,6 +111,12 @@ export default function PolicySection({ policies, news }: PolicySectionProps) {
                     </div>
                     <div className="mt-1 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                       <span>{item.source}</span>
+                      {item.publishTime && (
+                        <>
+                          <span className="text-gray-300 dark:text-gray-600">·</span>
+                          <span>{item.publishTime}</span>
+                        </>
+                      )}
                     </div>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
                       {item.summary}
