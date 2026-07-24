@@ -1,65 +1,31 @@
-// 头部组件
-
 'use client';
-
 import Link from 'next/link';
-import { useTheme } from '@/hooks/useTheme';
+import { BarChart3 } from 'lucide-react';
 import ThemeToggle from '@/components/report/ThemeToggle';
 
 export function Header() {
-  const { theme, toggleTheme, mounted } = useTheme();
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6"
-            >
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
-            <span className="hidden font-bold sm:inline-block">
-              能源日报系统
-            </span>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+      <div className="flex h-14 items-center justify-between px-4 sm:px-6">
+        <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors group-hover:bg-accent/90">
+              <BarChart3 className="h-5 w-5" />
+            </div>
+            <div className="hidden sm:block">
+              <span className="text-sm font-semibold tracking-tight text-foreground">能源日报</span>
+              <p className="text-[11px] leading-tight text-muted-foreground">一次能源·电力市场联合日报</p>
+            </div>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              首页
-            </Link>
-            <Link
-              href="/reports"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              历史日报
-            </Link>
-            <Link
-              href="/link"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              相关链接
-            </Link>
-          </nav>
         </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* 搜索框可以在这里添加 */}
-          </div>
-          <nav className="flex items-center">
-            {mounted && (
-              <ThemeToggle />
-            )}
-          </nav>
+        <nav className="flex items-center gap-1">
+          <Link href="/" className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent">首页</Link>
+          <Link href="/reports" className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent">历史日报</Link>
+          <Link href="/dashboard" className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent">数据看板</Link>
+          <Link href="/link" className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent">信息渠道</Link>
+        </nav>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
         </div>
       </div>
     </header>

@@ -11,6 +11,8 @@ import {
   Newspaper,
   CloudSun,
   Link2,
+  Calendar,
+  Archive,
 } from "lucide-react";
 import {
   getAllReports,
@@ -353,39 +355,34 @@ export default async function ReportDetailPage({
   );
 
   return (
-    <div className="flex-1">
-      {/* Top navigation bar */}
-      <header className="border-b border-border bg-card">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-3">
-              <Link
-                href="/"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                <span className="hidden sm:inline">返回首页</span>
-              </Link>
-              <div className="h-4 w-px bg-border" />
-              <Link
-                href="/reports"
-                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                历史归档
-              </Link>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {formatDate(date)} 星期{report.meta.weekday}
-            </div>
+    <div className="flex flex-col min-h-full">
+      {/* ── Sticky top navigation bar ── */}
+      <div className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="h-4 w-4" />
+              <span className="hidden sm:inline">返回首页</span>
+            </Link>
+            <div className="h-4 w-px bg-border" />
+            <Link href="/reports" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <Archive className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">历史归档</span>
+            </Link>
+            <div className="h-4 w-px bg-border" />
+            <span className="text-sm font-medium text-foreground">日报详情</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Calendar className="h-3.5 w-3.5" />
+            <span>{formatDate(date)} 星期{report.meta.weekday}</span>
           </div>
         </div>
-      </header>
+      </div>
 
-      <main id="main-content" className="mx-auto max-w-5xl px-4 sm:px-6 py-8">
-        {/* Report title block */}
+      {/* ── Scrollable content area ── */}
+      <div className="flex-1 mx-auto w-full max-w-4xl px-4 sm:px-6 py-8">
         <ReportHeader date={date} weekday={report.meta.weekday} />
 
-        {/* Report sections */}
         <div className="space-y-10">
           {mainSections.map((section, idx) => (
             <section key={idx}>
@@ -401,7 +398,6 @@ export default async function ReportDetailPage({
           ))}
         </div>
 
-        {/* Adjacent report navigation */}
         <div className="mt-12">
           <ReportNav
             prevDate={adjacent.prev}
@@ -410,16 +406,13 @@ export default async function ReportDetailPage({
           />
         </div>
 
-        {/* Footer */}
-        <footer className="mt-8 border-t border-border pt-6 pb-8">
-          <div className="flex flex-col items-center gap-2 text-center text-xs text-muted-foreground">
+        <div className="mt-8 border-t border-border pt-6 pb-4">
+          <div className="flex flex-col items-center gap-1 text-center text-xs text-muted-foreground">
             <p>一次能源·电力市场联合日报 · {formatDate(date)}</p>
-            <p>
-              数据来源：公开市场数据 · 仅供参考，不构成任何业务建议或交易策略
-            </p>
+            <p>数据来源：公开市场数据 · 仅供参考，不构成任何业务建议或交易策略</p>
           </div>
-        </footer>
-      </main>
+        </div>
+      </div>
     </div>
   );
 }

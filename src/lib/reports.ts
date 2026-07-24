@@ -37,10 +37,8 @@ function getWeekday(dateStr: string): string {
 }
 
 export function getAllReports(): ReportMeta[] {
-  // 如果在客户端环境，返回示例数据
-  if (!isServer) {
-    return getSampleReports();
-  }
+  // 如果在客户端环境，返回空数组
+  if (!isServer) return [];
 
   // 服务器端：从文件系统读取
   if (!fs.existsSync(REPORTS_DIR)) return [];
@@ -74,10 +72,8 @@ export function getAllReports(): ReportMeta[] {
 }
 
 export function getReportByDate(date: string): Report | null {
-  // 如果在客户端环境，返回示例数据
-  if (!isServer) {
-    return getSampleReportByDate(date);
-  }
+  // 如果在客户端环境，返回null
+  if (!isServer) return null;
 
   // 服务器端：从文件系统读取
   // Try exact filename first
@@ -171,42 +167,3 @@ function extractSections(content: string): ReportSection[] {
   return sections;
 }
 
-// 客户端示例数据
-function getSampleReports(): ReportMeta[] {
-  const now = new Date();
-  const reports: ReportMeta[] = [];
-  
-  // 生成最近7天的示例数据
-  for (let i = 0; i < 7; i++) {
-    const date = new Date(now);
-    date.setDate(date.getDate() - i);
-    const dateStr = date.toISOString().split('T')[0];
-    const weekday = ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
-    
-    reports.push({
-      date: dateStr,
-      title: "一次能源·电力市场联合日报",
-      weekday,
-      createdAt: date.toISOString(),
-      updatedAt: date.toISOString(),
-    });
-  }
-  
-  return reports;
-}
-
-function getSampleReportByDate(date: string): Report | null {
-  const weekday = ['日', '一', '二', '三', '四', '五', '六'][new Date(date).getDay()];
-  
-  return {
-    meta: {
-      date,
-      title: "一次能源·电力市场联合日报",
-      weekday,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-    content: `# 一次能源·电力市场联合日报\n\n**${date} 星期${weekday}**\n\n交易员3分钟速览 · 煤油气电 + 负荷天气`,
-    sections: [],
-  };
-}

@@ -5,9 +5,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-positive: #f43f5e;   /* rose-500 - for price UP */
-  --color-negative: #10b981;   /* emerald-500 - for price DOWN */
-  --color-flat: #94a3b8;      /* slate-400 - for flat */
+  --color-positive: #f43f5e;
+  --color-negative: #10b981;
+  --color-flat: #94a3b8;
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-card: var(--card);
@@ -18,27 +18,28 @@
 }
 
 :root {
-  --background: #f8fafc;         /* slate-50 */
-  --foreground: #0f172a;         /* slate-900 */
-  --muted: #f1f5f9;              /* slate-100 */
-  --muted-foreground: #64748b;   /* slate-500 */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
   --card: #ffffff;
   --card-foreground: #0f172a;
-  --border: #e2e8f0;             /* slate-200 */
-  --accent: #1e3a5f;             /* deep blue for enterprise feel */
+  --border: #e2e8f0;
+  --accent: #1e3a5f;
   --accent-foreground: #ffffff;
+  --radius: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f172a;         /* slate-900 */
-    --foreground: #f1f5f9;         /* slate-100 */
-    --muted: #1e293b;              /* slate-800 */
-    --muted-foreground: #94a3b8;   /* slate-400 */
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
     --card: #1e293b;
     --card-foreground: #f1f5f9;
-    --border: #334155;             /* slate-700 */
-    --accent: #3b82f6;             /* blue-500 */
+    --border: #334155;
+    --accent: #3b82f6;
     --accent-foreground: #ffffff;
   }
 }
@@ -49,77 +50,25 @@ body {
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+::selection { background: var(--accent); color: var(--accent-foreground); }
 
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-}
+.report-content h1 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; }
+.report-content h2 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin-top: 1.5rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.report-content h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-top: 1rem; margin-bottom: 0.5rem; }
+.report-content blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; margin: 0.75rem 0; color: var(--muted-foreground); font-style: italic; }
+.report-content p { margin: 0.5rem 0; line-height: 1.7; }
+.report-content hr { margin: 1.5rem 0; border-color: var(--border); }
+.report-content strong { font-weight: 600; }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
-}
+.card-hover { transition: all 0.2s ease; }
+.card-hover:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); transform: translateY(-1px); }
 
-/* Selection styling */
-::selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
-}
-
-/* Markdown content styling for report detail pages */
-.report-content h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 0.5rem;
-}
-
-.report-content h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.report-content h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.report-content blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 1rem;
-  margin: 0.75rem 0;
-  color: var(--muted-foreground);
-  font-style: italic;
-}
-
-.report-content p {
-  margin: 0.5rem 0;
-  line-height: 1.7;
-}
-
-.report-content hr {
-  margin: 1.5rem 0;
-  border-color: var(--border);
-}
-
-.report-content strong {
-  font-weight: 600;
-}
+a, button { transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease; }
