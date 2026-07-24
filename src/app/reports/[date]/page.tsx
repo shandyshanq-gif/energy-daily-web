@@ -1,19 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ChevronRight,
-  Droplets,
-  Flame,
-  Zap,
-  Mountain,
-  BarChart3,
-  Newspaper,
-  CloudSun,
-  Link2,
-  Calendar,
-  Archive,
-} from "lucide-react";
+import { ArrowLeft, Archive } from "lucide-react";
 import {
   getAllReports,
   getReportByDate,
@@ -25,18 +12,9 @@ import {
   extractWeatherData,
   extractPolicies,
   extractMarketNews,
-  extractDateLine,
-  type WeatherData,
-  type PolicyItem,
-  type MarketNewsItem,
 } from "@/lib/markdown";
-import PriceTable from "@/components/report/PriceTable";
-import WeatherGrid from "@/components/report/WeatherGrid";
-import PolicySection from "@/components/report/PolicySection";
 import ReportNav from "@/components/report/ReportNav";
-import ReportHeader from "@/components/report/ReportHeader";
 
-// ─── Static generation ────────────────────────────────────────────────
 export async function generateStaticParams() {
   try {
     const reports = getAllReports();
@@ -46,293 +24,403 @@ export async function generateStaticParams() {
   }
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────
-
 function formatDate(date: string): string {
   const d = new Date(date);
-  const y = d.getFullYear();
-  const m = d.getMonth() + 1;
-  const day = d.getDate();
-  return `${y}年${m}月${day}日`;
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 }
 
-/** Extract all markdown tables from a content string */
-function extractTables(markdown: string): string[] {
-  const tables: string[] = [];
-  const lines = markdown.split("\n");
-  let inTable = false;
-  let currentTable: string[] = [];
-
-  for (const line of lines) {
-    if (line.trim().startsWith("|") && line.trim().endsWith("|")) {
-      inTable = true;
-      currentTable.push(line);
-    } else {
-      if (inTable && currentTable.length > 0) {
-        tables.push(currentTable.join("\n"));
-        currentTable = [];
-      }
-      inTable = false;
-    }
-  }
-  if (currentTable.length > 0) {
-    tables.push(currentTable.join("\n"));
-  }
-  return tables;
+/** 从 markdown cell 提取链接 [text](url) */
+function extractLink(cell: string): { text: string; url: string } | null {
+  const m = cell.match(/\[([^\]]+)\]\(([^)]+)\)/);
+  return m ? { text: m[1], url: m[2] } : null;
 }
 
-/** Extract blockquote text from content (commentary lines) */
-function extractCommentary(markdown: string): string[] {
-  const quotes: string[] = [];
-  const lines = markdown.split("\n");
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (trimmed.startsWith("> ")) {
-      quotes.push(trimmed.replace(/^>\s*/, "").trim());
-    }
-  }
-  return quotes;
+/** 清理 markdown 粗体/emoji */
+function cleanCell(s: string): string {
+  return s.replace(/\*\*/g, "").replace(/[🛢️🔥⛏️⚡🌤️📊🔗🌴🌊🏙️🌾❄️🔥⚡📊✅😴]/gu, "").trim();
 }
 
-/** Extract lines that are NOT tables, blockquotes, or blank */
-function extractTextLines(markdown: string): string[] {
-  return markdown
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(
-      (l) =>
-        l.length > 0 &&
-        !l.startsWith("|") &&
-        !l.endsWith("|") &&
-        !l.startsWith(">") &&
-        !l.startsWith("---") &&
-        !l.startsWith("*") &&
-        !l.startsWith("#")
-    );
+/** 从涨跌文本判断方向 */
+function getChangeDir(val: string): "up" | "down" | "flat" {
+  if (val.includes("↑")) return "up";
+  if (val.includes("↓")) return "down";
+  return "flat";
 }
 
-/** Get icon and label for a section heading */
-function getSectionMeta(
-  heading: string
-): {
-  icon: React.ReactNode;
-  label: string;
-  type: "price" | "weather" | "policies" | "cross" | "summary" | "text";
-} {
-  if (heading.includes("🛢️") || heading.includes("原油")) {
-    return { icon: <Droplets className="h-5 w-5" />, label: "原油", type: "price" };
-  }
-  if (heading.includes("🔥") || heading.includes("天然气") || heading.includes("LNG")) {
-    return { icon: <Flame className="h-5 w-5" />, label: "天然气 / LNG", type: "price" };
-  }
-  if (heading.includes("⛏️") || heading.includes("煤炭")) {
-    return { icon: <Mountain className="h-5 w-5" />, label: "煤炭", type: "price" };
-  }
-  if (heading.includes("⚡") || heading.includes("电力市场")) {
-    return { icon: <Zap className="h-5 w-5" />, label: "电力市场", type: "policies" };
-  }
-  if (heading.includes("🌤️") || heading.includes("天气") || heading.includes("负荷区")) {
-    return { icon: <CloudSun className="h-5 w-5" />, label: "核心负荷区天气", type: "weather" };
-  }
-  if (heading.includes("📊") || heading.includes("综合分析") || heading.includes("关键数据")) {
-    return { icon: <BarChart3 className="h-5 w-5" />, label: "综合分析", type: "cross" };
-  }
-  if (heading.includes("🔗") || heading.includes("联动")) {
-    return { icon: <Link2 className="h-5 w-5" />, label: "综合分析", type: "cross" };
-  }
-  return { icon: <Newspaper className="h-5 w-5" />, label: heading, type: "text" };
+/** 从价格 cell 提取数字和单位 */
+function parsePriceCell(cell: string): { value: string; unit: string } {
+  const cleaned = cleanCell(cell);
+  const m = cleaned.match(/^([\d.]+)\s*(.*)$/);
+  if (m) return { value: m[1], unit: m[2] };
+  return { value: cleaned, unit: "" };
 }
 
-// ─── Commentary Block ─────────────────────────────────────────────────
-
-function CommentaryBlock({ quotes }: { quotes: string[] }) {
-  if (quotes.length === 0) return null;
-  return (
-    <div className="mt-3 space-y-2">
-      {quotes.map((quote, i) => (
-        <blockquote
-          key={i}
-          className="border-l-3 border-accent pl-4 text-sm text-muted-foreground italic leading-relaxed"
-        >
-          {quote}
-        </blockquote>
-      ))}
-    </div>
-  );
-}
-
-// ─── Section Renderer ─────────────────────────────────────────────────
-
-function SectionRenderer({
-  heading,
-  content,
+// ─── 渲染：原油 / 天然气国际（大数字卡片） ───
+function PriceCardSection({
+  title,
+  eyebrowRight,
+  tables,
+  columnsCount = 2,
 }: {
-  heading: string;
-  content: string;
+  title: string;
+  eyebrowRight: string;
+  tables: { headers: string[]; rows: string[][] }[];
+  columnsCount?: number;
 }) {
-  const meta = getSectionMeta(heading);
-  const tables = extractTables(content);
-  const commentary = extractCommentary(content);
-  const textLines = extractTextLines(content);
-
-  // Price sections (原油, 天然气, 煤炭)
-  if (meta.type === "price") {
-    const priceTables = tables
-      .map((t) => extractPriceTable(t))
-      .filter((p): p is { headers: string[]; rows: string[][] } => p !== null);
-
-    return (
-      <div className="space-y-4">
-        {priceTables.length > 0 ? (
-          priceTables.map((table, idx) => (
-            <PriceTable
-              key={idx}
-              title={priceTables.length > 1 ? `${meta.label}（表 ${idx + 1}）` : meta.label}
-              headers={table.headers}
-              rows={table.rows}
-              icon={meta.icon}
-            />
-          ))
-        ) : (
-          <div className="rounded-lg border border-border bg-card p-4">
-            <div className="flex items-center gap-2 mb-2">
-              {meta.icon}
-              <h3 className="text-sm font-semibold">{meta.label}</h3>
-            </div>
-            <div className="text-sm text-muted-foreground whitespace-pre-wrap">
-              {content}
-            </div>
-          </div>
-        )}
-        {textLines.length > 0 && (
-          <div className="space-y-1">
-            {textLines.map((line, i) => (
-              <p key={i} className="text-sm text-muted-foreground">
-                {line}
-              </p>
-            ))}
-          </div>
-        )}
-        <CommentaryBlock quotes={commentary} />
-      </div>
-    );
-  }
-
-  // Weather section
-  if (meta.type === "weather") {
-    const weatherData = extractWeatherData(`## ${heading}\n${content}`);
-    return (
-      <div>
-        <WeatherGrid weatherData={weatherData} />
-        <CommentaryBlock quotes={commentary} />
-      </div>
-    );
-  }
-
-  // Policies & News section (电力市场)
-  if (meta.type === "policies") {
-    const policies = extractPolicies(content);
-    const news = extractMarketNews(content);
-    const priceTables = tables
-      .map((t) => extractPriceTable(t))
-      .filter((p): p is { headers: string[]; rows: string[][] } => p !== null);
-
-    return (
-      <div className="space-y-4">
-        {priceTables.length > 0 && (
-          <div className="space-y-3">
-            {priceTables.map((table, idx) => (
-              <PriceTable
-                key={idx}
-                title=""
-                headers={table.headers}
-                rows={table.rows}
-                icon={meta.icon}
-              />
-            ))}
-          </div>
-        )}
-        <PolicySection policies={policies} news={news} />
-        <CommentaryBlock quotes={commentary} />
-      </div>
-    );
-  }
-
-  // Summary & Cross sections (综合分析)
-  if (meta.type === "summary" || meta.type === "cross") {
-    const priceTables = tables
-      .map((t) => extractPriceTable(t))
-      .filter((p): p is { headers: string[]; rows: string[][] } => p !== null);
-
-    // Extract numbered list items
-    const numberedItems = content
-      .split("\n")
-      .filter((l) => l.trim().match(/^\d+\./))
-      .map((l) => l.replace(/^\d+\.\s+/, "").replace(/\*\*/g, "").trim())
-      .filter(Boolean);
-
-    return (
-      <div className="space-y-4">
-        {priceTables.length > 0 ? (
-          priceTables.map((table, idx) => (
-            <PriceTable
-              key={idx}
-              title={meta.label}
-              headers={table.headers}
-              rows={table.rows}
-              icon={meta.icon}
-            />
-          ))
-        ) : numberedItems.length > 0 ? (
-          <div className="rounded-lg border border-border bg-card p-5">
-            <div className="flex items-center gap-2 mb-3">
-              {meta.icon}
-              <h3 className="text-sm font-semibold">{meta.label}</h3>
-            </div>
-            <ul className="space-y-3">
-              {numberedItems.map((item, i) => (
-                <li key={i} className="flex gap-3 text-sm">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs font-medium text-accent">
-                    {i + 1}
-                  </span>
-                  <span className="leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <div className="rounded-lg border border-border bg-card p-5">
-            <div className="flex items-center gap-2 mb-2">
-              {meta.icon}
-              <h3 className="text-sm font-semibold">{meta.label}</h3>
-            </div>
-            <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
-              {content}
-            </p>
-          </div>
-        )}
-        <CommentaryBlock quotes={commentary} />
-      </div>
-    );
-  }
-
-  // Default text section - fallback
+  const cls = columnsCount === 3 ? "price-cards-3" : "price-cards";
   return (
-    <div className="rounded-lg border border-border bg-card p-5">
-      <div className="flex items-center gap-2 mb-2">
-        {meta.icon}
-        <h3 className="text-sm font-semibold">{meta.label}</h3>
+    <div className="card">
+      <div className="card-head">
+        <span className="card-eyebrow">{title}</span>
+        <span className="card-head-right">{eyebrowRight}</span>
       </div>
-      <div className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
-        {content}
+      <div className={cls}>
+        {tables.flatMap((t, ti) =>
+          t.rows.map((row, ri) => {
+            const name = cleanCell(row[0]);
+            const priceCell = row[1] || "";
+            const { value, unit } = parsePriceCell(priceCell);
+            const changeRaw = cleanCell(row[2] || "");
+            const dir = getChangeDir(changeRaw);
+            const changeText = changeRaw.replace(/[-+]/, (m) => (m === "-" ? "-" : "+"));
+            const link = extractLink(row[row.length - 1] || "");
+
+            // 找月涨跌/同比（如果有）
+            let monthly = "";
+            let yoy = "";
+            if (t.headers.length > 4) {
+              for (let h = 3; h < t.headers.length - 2; h++) {
+                const hdr = t.headers[h].toLowerCase();
+                if (hdr.includes("月")) monthly = cleanCell(row[h] || "");
+                if (hdr.includes("同")) yoy = cleanCell(row[h] || "");
+              }
+            }
+
+            return (
+              <div className="price-card" key={`${ti}-${ri}`}>
+                <div className="price-label">{name}</div>
+                <div className="price-main">
+                  <span className="price-value">{value || "数据暂缺"}</span>
+                  {unit && <span className="price-unit">{unit}</span>}
+                </div>
+                {value ? (
+                  <span className={`price-change ${dir}`}>{changeText || "→ 持平"}</span>
+                ) : (
+                  <span className="price-change none">— —</span>
+                )}
+                <div className="price-meta">
+                  {monthly && <span>月涨跌 <strong>{monthly}</strong></span>}
+                  {yoy && <span>同比 <strong>{yoy}</strong></span>}
+                  {link && (
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="source-btn">
+                      {link.text} ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
-      <CommentaryBlock quotes={commentary} />
     </div>
   );
 }
 
-// ─── Page Component ───────────────────────────────────────────────────
+// ─── 渲染：LNG 国内（全国均价大数 + 区域网格） ───
+function LngDomesticSection({
+  tables,
+}: {
+  tables: { headers: string[]; rows: string[][] }[];
+}) {
+  const table = tables[0];
+  if (!table) return null;
 
+  // 第一行是全国均价
+  const nationalRow = table.rows[0];
+  const nationalName = cleanCell(nationalRow[0]);
+  const nationalPrice = parsePriceCell(nationalRow[1]);
+  const nationalLink = extractLink(nationalRow[nationalRow.length - 1] || "");
+  const nationalDate = cleanCell(nationalRow[2] || "");
+
+  // 其余行是区域
+  const regions = table.rows.slice(1).map((r) => ({
+    name: cleanCell(r[0]),
+    price: parsePriceCell(r[1]).value,
+  }));
+
+  return (
+    <div className="card">
+      <div className="card-head">
+        <span className="card-eyebrow">LNG · 国内市场</span>
+        <span className="card-head-right">Domestic LNG · SHPGX</span>
+      </div>
+      <div className="card-body">
+        <div className="lng-section">
+          <div className="lng-national">
+            <div className="price-label">{nationalName}</div>
+            <div className="price-main">
+              <span className="price-value">{nationalPrice.value}</span>
+              <span className="price-unit">{nationalPrice.unit}</span>
+            </div>
+            <div className="price-meta" style={{ borderTop: "none", paddingTop: 0, marginTop: "8px" }}>
+              <span>报价日 <strong>{nationalDate}</strong></span>
+              {nationalLink && (
+                <a href={nationalLink.url} target="_blank" rel="noopener noreferrer" className="source-btn">
+                  {nationalLink.text} ↗
+                </a>
+              )}
+            </div>
+          </div>
+          <div className="lng-regions">
+            {regions.map((r, i) => (
+              <div className="lng-region" key={i}>
+                <span className="lng-region-name">{r.name}</span>
+                <span className="lng-region-price">{r.price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── 渲染：煤炭（表格） ───
+function CoalTableSection({
+  tables,
+}: {
+  tables: { headers: string[]; rows: string[][] }[];
+}) {
+  const table = tables[0];
+  if (!table) return null;
+
+  return (
+    <div className="card">
+      <div className="card-head">
+        <span className="card-eyebrow">煤炭</span>
+        <span className="card-head-right">Coal · CCTD</span>
+      </div>
+      <div style={{ padding: 0 }}>
+        <table className="price-table">
+          <thead>
+            <tr>
+              {table.headers.map((h, i) => (
+                <th key={i} style={{ textAlign: i === 0 ? "left" : "right" }}>{cleanCell(h)}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {table.rows.map((row, ri) => (
+              <tr key={ri}>
+                {row.map((cell, ci) => {
+                  const cleaned = cleanCell(cell);
+                  const link = extractLink(cell);
+                  const isChange = table.headers[ci]?.includes("涨跌");
+                  const dir = isChange ? getChangeDir(cleaned) : null;
+                  return (
+                    <td
+                      key={ci}
+                      className={ci === 0 ? "" : isChange ? "num-right" : ci === row.length - 1 ? "action" : "num-right"}
+                      style={{ textAlign: ci === 0 ? "left" : "right" }}
+                    >
+                      {link ? (
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="source-btn">
+                          {link.text} ↗
+                        </a>
+                      ) : isChange && dir ? (
+                        <span style={{ color: dir === "up" ? "var(--red)" : dir === "down" ? "var(--ink-secondary)" : "var(--ink-tertiary)", fontWeight: 500 }}>
+                          {cleaned}
+                        </span>
+                      ) : ci === 0 ? (
+                        <strong>{cleaned}</strong>
+                      ) : (
+                        cleaned
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ─── 渲染：电力市场 ───
+function PowerMarketSection({
+  policies,
+  news,
+}: {
+  policies: { title: string; summary: string; source: string; sourceUrl: string; publishTime?: string }[];
+  news: { title: string; summary: string; source: string; sourceUrl: string; publishTime?: string }[];
+}) {
+  return (
+    <>
+      <div className="c-4">
+        <div className="card">
+          <div className="card-head">
+            <span className="card-eyebrow">政策</span>
+            <span className="card-head-right">Policies</span>
+          </div>
+          <div className="card-body">
+            <div className="news-list">
+              {policies.map((p, i) => (
+                <div className="news-item policy" key={i}>
+                  <span className="news-tag">⚪ 历史参考</span>
+                  <div className="news-title">{p.title}</div>
+                  <div className="news-desc">{p.summary}</div>
+                  <div className="news-meta">
+                    <span>{p.publishTime || ""}</span>
+                    <a href={p.sourceUrl} target="_blank" rel="noopener noreferrer" className="source-btn">
+                      {p.source} ↗
+                    </a>
+                  </div>
+                </div>
+              ))}
+              {policies.length === 0 && <div className="news-desc">暂无政策动态</div>}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="c-8">
+        <div className="card">
+          <div className="card-head">
+            <span className="card-eyebrow">市场动态</span>
+            <span className="card-head-right">Market News</span>
+          </div>
+          <div className="card-body">
+            <div className="news-list">
+              {news.map((n, i) => (
+                <div className="news-item news-policy" key={i}>
+                  <div className="news-title">{n.title}</div>
+                  <div className="news-desc">{n.summary}</div>
+                  <div className="news-meta">
+                    <span>{n.source} · {n.publishTime || ""}</span>
+                    <a href={n.sourceUrl} target="_blank" rel="noopener noreferrer" className="source-btn">
+                      {n.source} ↗
+                    </a>
+                  </div>
+                </div>
+              ))}
+              {news.length === 0 && <div className="news-desc">暂无市场动态</div>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ─── 渲染：天气（当日 5 字段，无负荷判断） ───
+function WeatherSection({
+  weatherData,
+}: {
+  weatherData: { city: string; weather: string; tempLow: number; tempHigh: number; wind: string }[];
+}) {
+  if (weatherData.length === 0) return null;
+
+  return (
+    <div className="c-12">
+      <div className="card">
+        <div className="card-head">
+          <span className="card-eyebrow">核心负荷区天气</span>
+          <span className="card-head-right">Core Load Weather · 今日</span>
+        </div>
+        <div className="card-body">
+          <div className="weather-day-head">
+            <div className="weather-day-date">10 城市 · 当日天气</div>
+            <div className="weather-day-sum">数据来源 CMA 中央气象台</div>
+          </div>
+          <div className="weather-grid">
+            {weatherData.map((w, i) => {
+              const hot = w.tempHigh >= 35;
+              const hasRain = w.weather.includes("雨") || w.weather.includes("雪");
+              return (
+                <div className="weather-cell" key={i}>
+                  <div className="weather-cell-city">{w.city}</div>
+                  <div className="weather-cell-weather">{w.weather}</div>
+                  <div className={`weather-cell-temp ${hot ? "hot" : ""}`}>
+                    {w.tempLow}~{w.tempHigh}℃
+                  </div>
+                  <div className="weather-cell-meta">
+                    <span>降水 <strong>{hasRain ? "有" : "无"}</strong></span>
+                    <span>风力 <strong>{w.wind}</strong></span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── 渲染：当日总结与评述 ───
+function ReviewSection({ content }: { content: string }) {
+  // 提取市场画像（blockquote）
+  const portraitMatch = content.match(/>\s*\*\*今日市场画像\*\*[：:]\s*([\s\S]+?)(?=\n\n|\n\*\*|\n#|$)/);
+  const portrait = portraitMatch ? portraitMatch[1].trim() : "";
+
+  // 提取编号观点（格式：**N. [标签] 标题**\n描述...）
+  const itemRegex = /\*\*(\d+)\.\s+\[([^\]]+)\]\s+([^*]+?)\*\*\s*\n([\s\S]*?)(?=\n\*\*\d+\.|\n>|\n---|\n\*|$)/g;
+  const items: { tag: string; title: string; desc: string }[] = [];
+  let m;
+  while ((m = itemRegex.exec(content)) !== null) {
+    items.push({
+      tag: m[2].trim(),
+      title: m[3].trim(),
+      desc: m[4].trim().replace(/\n/g, " "),
+    });
+  }
+
+  return (
+    <div className="c-12">
+      <div className="card">
+        <div className="card-head">
+          <span className="card-eyebrow">当日总结与评述</span>
+          <span className="card-head-right">Daily Review</span>
+        </div>
+        <div className="review-wrap">
+          {portrait && (
+            <div className="review-portrait">
+              <div className="review-section-label">市场画像</div>
+              <div className="review-headline">{portrait}</div>
+            </div>
+          )}
+
+          {items.length > 0 && (
+            <>
+              {portrait && <hr className="review-divider" />}
+              <div className="review-section-label">关键观点</div>
+              <div className="review-list">
+                {items.map((item, i) => (
+                  <div className="review-item" key={i}>
+                    <div className="review-num">{String(i + 1).padStart(2, "0")}</div>
+                    <div>
+                      <span className="review-tag">{item.tag}</span>
+                      <div className="review-item-title">{item.title}</div>
+                      <div className="review-item-desc">{item.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          <div className="review-disclaimer">
+            以上评述仅基于公开数据客观描述市场现象，不构成任何交易建议。
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── 主页面 ───
 export default async function ReportDetailPage({
   params,
 }: {
@@ -340,78 +428,148 @@ export default async function ReportDetailPage({
 }) {
   const { date } = await params;
   const report = getReportByDate(date);
-
-  if (!report) {
-    notFound();
-  }
+  if (!report) notFound();
 
   const adjacent = getAdjacentDates(date);
   const sections = extractSections(report.content);
-  const dateLine = extractDateLine(report.content);
 
-  // Filter out empty sections (the intro block before first ##)
-  const mainSections = sections.filter(
-    (s) => s.content.trim().length > 0 || s.heading.trim().length > 0
-  );
+  // 解析各板块
+  let oilTables: { headers: string[]; rows: string[][] }[] = [];
+  let gasIntlTables: { headers: string[]; rows: string[][] }[] = [];
+  let lngDomesticTables: { headers: string[]; rows: string[][] }[] = [];
+  let coalTables: { headers: string[]; rows: string[][] }[] = [];
+  let policies: any[] = [];
+  let newsItems: any[] = [];
+  let weatherData: any[] = [];
+  let summaryContent = "";
+
+  for (const section of sections) {
+    const heading = section.heading;
+    const content = section.content;
+
+    if (heading.includes("原油")) {
+      const tables = content.split(/\n### /).flatMap(sub => {
+        const t = extractPriceTable(sub.includes("###") ? "###" + sub : sub);
+        return t ? [t] : [];
+      });
+      oilTables = tables;
+    } else if (heading.includes("天然气") || heading.includes("LNG")) {
+      // 拆分国际市场 / 国内市场
+      const intlMatch = content.match(/###\s*国际市场[\s\S]*?(?=###|##|$)/);
+      const domesticMatch = content.match(/###\s*国内市场[\s\S]*?(?=###|##|$)/);
+      if (intlMatch) {
+        const t = extractPriceTable(intlMatch[0]);
+        if (t) gasIntlTables = [t];
+      }
+      if (domesticMatch) {
+        const t = extractPriceTable(domesticMatch[0]);
+        if (t) lngDomesticTables = [t];
+      }
+    } else if (heading.includes("煤炭")) {
+      const t = extractPriceTable(content);
+      if (t) coalTables = [t];
+    } else if (heading.includes("电力市场")) {
+      policies = extractPolicies(content);
+      newsItems = extractMarketNews(content);
+    } else if (heading.includes("天气") || heading.includes("负荷区")) {
+      weatherData = extractWeatherData(`## ${heading}\n${content}`);
+    } else if (heading.includes("总结") || heading.includes("评述")) {
+      summaryContent = content;
+    }
+  }
 
   return (
     <div className="flex flex-col min-h-full">
-      {/* ── Sticky top navigation bar ── */}
-      <div className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3">
+      {/* Sticky 顶部导航 */}
+      <div
+        className="sticky top-0 z-40 border-b"
+        style={{ background: "var(--bg)", borderColor: "var(--line)" }}
+      >
+        <div
+          className="flex items-center justify-between mx-auto"
+          style={{ maxWidth: "var(--max-w)", padding: "12px 24px" }}
+        >
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="h-4 w-4" />
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 text-[11px] transition-colors"
+              style={{ color: "var(--ink-secondary)" }}
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">返回首页</span>
             </Link>
-            <div className="h-4 w-px bg-border" />
-            <Link href="/reports" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <div style={{ width: "1px", height: "16px", background: "var(--line)" }} />
+            <Link
+              href="/reports"
+              className="flex items-center gap-1 text-[11px] transition-colors"
+              style={{ color: "var(--ink-secondary)" }}
+            >
               <Archive className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">历史归档</span>
             </Link>
-            <div className="h-4 w-px bg-border" />
-            <span className="text-sm font-medium text-foreground">日报详情</span>
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Calendar className="h-3.5 w-3.5" />
-            <span>{formatDate(date)} 星期{report.meta.weekday}</span>
+          <div className="text-[11px]" style={{ color: "var(--ink-secondary)" }}>
+            {formatDate(date)} 星期{report.meta.weekday}
           </div>
         </div>
       </div>
 
-      {/* ── Scrollable content area ── */}
-      <div className="flex-1 mx-auto w-full max-w-4xl px-4 sm:px-6 py-8">
-        <ReportHeader date={date} weekday={report.meta.weekday} />
-
-        <div className="mt-6 space-y-10">
-          {mainSections.map((section, idx) => (
-            <section key={idx}>
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
-                {getSectionMeta(section.heading).icon}
-                <span>{getSectionMeta(section.heading).label}</span>
-              </h2>
-              <SectionRenderer
-                heading={section.heading}
-                content={section.content}
-              />
-            </section>
-          ))}
-        </div>
-
-        <div className="mt-12">
-          <ReportNav
-            prevDate={adjacent.prev}
-            nextDate={adjacent.next}
-            currentDate={date}
-          />
-        </div>
-
-        <div className="mt-8 border-t border-border pt-6 pb-4">
-          <div className="flex flex-col items-center gap-1 text-center text-xs text-muted-foreground">
-            <p>一次能源·电力市场联合日报 · {formatDate(date)}</p>
-            <p>数据来源：公开市场数据 · 仅供参考，不构成任何业务建议或交易策略</p>
+      {/* Masthead */}
+      <div className="masthead">
+        <div>
+          <div className="masthead-issue">Daily Report</div>
+          <h1>一次能源·电力市场联合日报</h1>
+          <div className="masthead-meta">
+            {formatDate(date)} · 星期{report.meta.weekday}
           </div>
         </div>
+      </div>
+
+      {/* 内容网格 */}
+      <div className="content">
+        {/* 原油（12列）确保 2 张卡片有足够空间 */}
+        {oilTables.length > 0 && (
+          <div className="c-12">
+            <PriceCardSection title="原油" eyebrowRight="Crude Oil" tables={oilTables} columnsCount={2} />
+          </div>
+        )}
+
+        {/* 天然气国际（12列）确保 3 张卡片有足够空间 */}
+        {gasIntlTables.length > 0 && (
+          <div className="c-12">
+            <PriceCardSection title="天然气 · 国际" eyebrowRight="Natural Gas · International" tables={gasIntlTables} columnsCount={3} />
+          </div>
+        )}
+
+        {/* LNG 国内（12列） */}
+        {lngDomesticTables.length > 0 && (
+          <div className="c-12">
+            <LngDomesticSection tables={lngDomesticTables} />
+          </div>
+        )}
+
+        {/* 煤炭（12列） */}
+        {coalTables.length > 0 && (
+          <div className="c-12">
+            <CoalTableSection tables={coalTables} />
+          </div>
+        )}
+
+        {/* 电力市场（4+8列） */}
+        {(policies.length > 0 || newsItems.length > 0) && (
+          <PowerMarketSection policies={policies} news={newsItems} />
+        )}
+
+        {/* 天气（12列） */}
+        {weatherData.length > 0 && <WeatherSection weatherData={weatherData} />}
+
+        {/* 当日总结（12列） */}
+        {summaryContent && <ReviewSection content={summaryContent} />}
+      </div>
+
+      {/* 导航 */}
+      <div style={{ maxWidth: "var(--max-w)", margin: "0 auto", padding: "0 24px 48px" }}>
+        <ReportNav prevDate={adjacent.prev} nextDate={adjacent.next} currentDate={date} />
       </div>
     </div>
   );
