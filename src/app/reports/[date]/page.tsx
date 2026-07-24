@@ -383,7 +383,7 @@ export default async function ReportDetailPage({
       <div className="flex-1 mx-auto w-full max-w-4xl px-4 sm:px-6 py-8">
         <ReportHeader date={date} weekday={report.meta.weekday} />
 
-        <div className="space-y-10">
+        <div className="mt-6 space-y-10">
           {mainSections.map((section, idx) => (
             <section key={idx}>
               <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
