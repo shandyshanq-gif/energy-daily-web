@@ -1,8 +1,7 @@
-'use client';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, Building2, Globe, UserRound, Info } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
-interface ChannelItem { title: string; url: string; description: string; category: '政府机关' | '权威媒体' | '自媒体'; icon?: string; }
+interface ChannelItem { title: string; url: string; description: string; category: '政府机关' | '权威媒体'; icon?: string; }
 
 const channels: ChannelItem[] = [
   { title: '国家能源局', url: 'https://www.nea.gov.cn/', description: '能源政策、行业监管、电力市场改革政策发布', category: '政府机关', icon: '⚡' },
@@ -16,77 +15,98 @@ const channels: ChannelItem[] = [
   { title: '上海石油天然气交易中心·SHPGX', url: 'https://www.shpgx.com/', description: 'LNG全国均价及16区域价（JSON API直采）', category: '权威媒体', icon: '🔥' },
   { title: '中国煤炭市场网·CCTD', url: 'https://www.cctd.com.cn/', description: '动力煤7品种价格（平仓价/坑口价/出厂价）', category: '权威媒体', icon: '⛏️' },
   { title: '北极星电力网', url: 'https://www.bjx.com.cn/', description: '电力市场政策、交易规则、现货动态综合资讯', category: '权威媒体', icon: '📰' },
-  { title: '北京电��交易中心', url: 'https://pmos.sgcc.com.cn/', description: '电力中长期交易、绿电绿证交易信息披露', category: '权威媒体', icon: '📈' },
+  { title: '北京电力交易中心', url: 'https://pmos.sgcc.com.cn/', description: '电力中长期交易、绿电绿证交易信息披露', category: '权威媒体', icon: '📈' },
   { title: '广州电力交易中心', url: 'https://www.gzpec.cn/', description: '南方区域电力市场交易信息披露', category: '权威媒体', icon: '📈' },
 ];
 
-const groupedChannels = channels.reduce<Record<string, ChannelItem[]>>((acc, ch) => { if (!acc[ch.category]) acc[ch.category] = []; acc[ch.category].push(ch); return acc; }, {});
+const groupedChannels = channels.reduce<Record<string, ChannelItem[]>>((acc, ch) => {
+  if (!acc[ch.category]) acc[ch.category] = [];
+  acc[ch.category].push(ch);
+  return acc;
+}, {});
 
-const categoryMeta: Record<string, { icon: React.ReactNode; color: string; desc: string }> = {
-  '政府机关': { icon: <Building2 className="h-5 w-5" />, color: 'border-l-blue-500 bg-blue-50/50 dark:bg-blue-950/20', desc: '国家级部委及直属机构，政策权威发布' },
-  '权威媒体': { icon: <Globe className="h-5 w-5" />, color: 'border-l-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20', desc: '行业数据平台、交易中心及专业资讯媒体' },
-  '自媒体': { icon: <UserRound className="h-5 w-5" />, color: 'border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20', desc: '行业分析师、独立研究机构及个人观点' },
+const categoryOrder = ['政府机关', '权威媒体'];
+const categoryDesc: Record<string, string> = {
+  '政府机关': '国家级部委及直属机构，政策权威发布',
+  '权威媒体': '行业数据平台、交易中心及专业资讯媒体',
 };
-
-const categoryOrder = ['政府机关', '权威媒体', '自媒体'];
 
 export default function InfoChannelPage() {
   return (
     <div className="flex flex-col min-h-full">
-      <div className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"><ArrowLeft className="h-4 w-4" /><span className="hidden sm:inline">返回首页</span></Link>
-            <div className="h-4 w-px bg-border" />
-            <h1 className="text-sm font-semibold text-foreground">信息渠道库</h1>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground"><Info className="h-3.5 w-3.5" /><span>日报工作流真实数据源</span></div>
+      {/* Masthead */}
+      <div className="masthead">
+        <div>
+          <div className="masthead-issue">Channels</div>
+          <h1>信息渠道库</h1>
+          <div className="masthead-meta">日报工作流实际使用的全部信息渠道 · 共 {channels.length} 个</div>
         </div>
       </div>
-      <div className="flex-1 mx-auto w-full max-w-4xl px-4 sm:px-6 py-8">
-        <div className="mb-8">
-          <h2 className="text-xl font-bold tracking-tight text-foreground">信息渠道库</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">以下为本日报工作流中实际使用的全部信息渠道链接，按照渠道属性分为政府机关、权威媒体、自媒体三类，便于查阅与溯源。</p>
-        </div>
-        <div className="space-y-10">
-          {categoryOrder.map((cat) => {
-            const items = groupedChannels[cat];
-            if (!items || items.length === 0) return null;
-            const meta = categoryMeta[cat];
-            return (
-              <section key={cat}>
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="text-foreground">{meta.icon}</span>
-                  <h3 className="text-base font-semibold text-foreground">{cat}</h3>
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">{items.length} 个渠道</span>
+
+      {/* 内容 */}
+      <div className="content">
+        {categoryOrder.map((cat) => {
+          const items = groupedChannels[cat];
+          if (!items || items.length === 0) return null;
+          return (
+            <div className="c-12" key={cat}>
+              <div className="card">
+                <div className="card-head">
+                  <span className="card-eyebrow">{cat}</span>
+                  <span className="card-head-right">{items.length} 个渠道</span>
                 </div>
-                <p className="mb-4 text-sm text-muted-foreground">{meta.desc}</p>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {items.map((ch, idx) => (
-                    <a key={idx} href={ch.url} target="_blank" rel="noopener noreferrer" className={`group block rounded-lg border border-border bg-card p-4 border-l-[3px] transition-all hover:shadow-sm hover:-translate-y-0.5 ${meta.color}`}>
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            {ch.icon && <span className="text-base flex-shrink-0">{ch.icon}</span>}
-                            <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors truncate">{ch.title}</h4>
+                <div className="card-body">
+                  <p className="text-[11px] mb-4" style={{ color: "var(--ink-secondary)" }}>
+                    {categoryDesc[cat]}
+                  </p>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                      gap: "1px",
+                      background: "var(--line-subtle)",
+                    }}
+                  >
+                    {items.map((ch, idx) => (
+                      <a
+                        key={idx}
+                        href={ch.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="channel-link group"
+                        style={{
+                          background: "var(--bg)",
+                          padding: "16px",
+                          borderLeft: "2px solid transparent",
+                          display: "block",
+                          transition: "border-color 0.15s, background 0.15s",
+                        }}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              {ch.icon && <span style={{ fontSize: "14px" }}>{ch.icon}</span>}
+                              <h4 style={{ fontSize: "13px", fontWeight: 600, color: "var(--ink-primary)" }}>
+                                {ch.title}
+                              </h4>
+                            </div>
+                            <p className="text-[10px] mt-1.5 leading-relaxed" style={{ color: "var(--ink-secondary)" }}>
+                              {ch.description}
+                            </p>
                           </div>
-                          <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{ch.description}</p>
+                          <ExternalLink
+                            className="h-3 w-3 flex-shrink-0 transition-colors"
+                            style={{ color: "var(--ink-tertiary)" }}
+                          />
                         </div>
-                        <ExternalLink className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground/40 group-hover:text-accent transition-colors" />
-                      </div>
-                    </a>
-                  ))}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </section>
-            );
-          })}
-        </div>
-        <div className="mt-12 border-t border-border pt-6">
-          <div className="flex flex-col items-center gap-1 text-center text-xs text-muted-foreground">
-            <p>以上链接均来自日报工作流实际使用的数据源</p>
-            <p>如有链接失效，请及时反馈更新</p>
-          </div>
-        </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
