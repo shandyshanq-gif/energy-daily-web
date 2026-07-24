@@ -1,23 +1,110 @@
-import { CloudSun, Thermometer, Wind } from "lucide-react";
+interface WeatherData {
+  city: string;
+  weather: string;
+  tempLow: number;
+  tempHigh: number;
+  wind: string;
+}
 
-interface WeatherData { city: string; weather: string; tempLow: number; tempHigh: number; wind: string; }
-interface WeatherGridProps { weatherData: WeatherData[]; }
+interface WeatherGridProps {
+  weatherData: WeatherData[];
+}
+
+/**
+ * 从天气描述推断降水情况
+ */
+function getPrecipitation(weather: string): string {
+  if (weather.includes("雨") || weather.includes("雪")) return "有";
+  return "无";
+}
+
+/**
+ * 判断是否为高温（≥35°C）
+ */
+function isHot(tempHigh: number): boolean {
+  return tempHigh >= 35;
+}
 
 export default function WeatherGrid({ weatherData }: WeatherGridProps) {
   if (weatherData.length === 0) return null;
+
   return (
-    <div className="space-y-3">
-      <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground"><CloudSun className="h-4 w-4 text-accent" />核心负荷区天气</h4>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {weatherData.map((weather, idx) => (
-          <div key={idx} className="rounded-lg border border-border bg-card p-4 transition-all hover:border-accent/30 hover:shadow-sm">
-            <div className="mb-3 flex items-center justify-between"><h5 className="font-semibold text-foreground">{weather.city}</h5><span className="text-sm text-muted-foreground">{weather.weather}</span></div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="flex items-center gap-1.5"><Thermometer className="h-3.5 w-3.5 text-muted-foreground" /><span className="text-foreground/80">{weather.tempLow}°C ~ {weather.tempHigh}°C</span></div>
-              <div className="flex items-center gap-1.5"><Wind className="h-3.5 w-3.5 text-muted-foreground" /><span className="text-foreground/80">{weather.wind}</span></div>
+    <div>
+      <div
+        className="flex items-baseline gap-3"
+        style={{ marginBottom: '16px' }}
+      >
+        <div className="text-[14px] font-semibold">当日天气</div>
+        <div className="text-[11px]" style={{ color: 'var(--ink-secondary)' }}>
+          {weatherData.length} 城市 · 数据来源 CMA 中央气象台
+        </div>
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gap: '1px',
+          background: 'var(--line-subtle)',
+        }}
+      >
+        {weatherData.map((weather, idx) => {
+          const hot = isHot(weather.tempHigh);
+          return (
+            <div
+              key={idx}
+              style={{
+                background: 'var(--bg)',
+                padding: '16px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}
+            >
+              <div className="text-[14px] font-semibold">{weather.city}</div>
+              <div className="text-[11px]" style={{ color: 'var(--ink-secondary)' }}>
+                {weather.weather}
+              </div>
+              <div
+                className="tabular"
+                style={{
+                  fontSize: '18px',
+                  fontWeight: '700',
+                  letterSpacing: '-0.02em',
+                  margin: '4px 0',
+                  lineHeight: '1',
+                  color: hot ? 'var(--red)' : 'var(--ink-primary)',
+                }}
+              >
+                {weather.tempLow}~{weather.tempHigh}℃
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                  paddingTop: '8px',
+                  borderTop: '1px solid var(--line-subtle)',
+                  fontSize: '10px',
+                  color: 'var(--ink-tertiary)',
+                }}
+              >
+                <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>降水</span>
+                  <strong style={{ color: 'var(--ink-secondary)', fontWeight: '500' }}>
+                    {getPrecipitation(weather.weather)}
+                  </strong>
+                </span>
+                <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>风力</span>
+                  <strong style={{ color: 'var(--ink-secondary)', fontWeight: '500' }}>
+                    {weather.wind}
+                  </strong>
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
