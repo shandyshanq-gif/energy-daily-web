@@ -1,91 +1,139 @@
 import Link from "next/link";
-import { CalendarDays, Newspaper, TrendingUp, ChevronRight, BarChart3, FileText } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { getAllReports } from "@/lib/reports";
-import { extractDateLine, extractSubtitle } from "@/lib/markdown";
 import { formatDate } from "@/lib/utils";
 
 export default function HomePage() {
   const allReports = getAllReports();
-  const latest = allReports.length > 0 ? { meta: allReports[0], content: "" } : null;
-  const recentReports = latest ? allReports.filter((r) => r.date !== latest.meta.date).slice(0, 9) : allReports.slice(0, 9);
+  const latest = allReports.length > 0 ? allReports[0] : null;
+  const recentReports = latest ? allReports.filter(r => r.date !== latest.date).slice(0, 9) : allReports.slice(0, 9);
   const reportCount = allReports.length;
 
   return (
     <div className="flex flex-col min-h-full">
-      <div className="border-b border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">能源日报</h1>
-              <p className="mt-1 text-sm text-muted-foreground">一次能源·电力市场联合日报</p>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CalendarDays className="h-4 w-4" />
-              <span>共 <strong className="text-foreground">{reportCount}</strong> 期</span>
-            </div>
-          </div>
+      {/* Masthead */}
+      <div className="masthead">
+        <div>
+          <div className="masthead-issue">Energy Daily Report</div>
+          <h1>能源日报</h1>
+          <div className="masthead-meta">一次能源·电力市场联合日报</div>
+        </div>
+        <a href="/dashboard" className="masthead-btn">↗ 数据看板</a>
+      </div>
+
+      {/* 内容 */}
+      <div className="content">
+        {/* 最新一期 */}
+        <div className="c-12">
           {latest ? (
-            <Link href={`/reports/${latest.meta.date}`} className="group block">
-              <article className="relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-accent/40 hover:shadow-md">
-                <div className="h-1.5 bg-accent" />
-                <div className="p-6 sm:p-8">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <TrendingUp className="h-4 w-4 text-accent" />
-                        <span className="text-xs font-semibold uppercase tracking-wider text-accent">最新日报</span>
-                      </div>
-                      <h3 className="text-xl font-bold leading-tight tracking-tight sm:text-2xl">{latest.meta.title}</h3>
-                      <p className="mt-2 text-base text-muted-foreground">{formatDate(latest.meta.date)} 星期{latest.meta.weekday}</p>
-                    </div>
-                    <div className="hidden sm:flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 group-hover:bg-accent/20 transition-colors">
-                      <FileText className="h-7 w-7 text-accent" />
-                    </div>
+            <div className="card">
+              <div className="card-head">
+                <span className="card-eyebrow">最新日报</span>
+                <span className="card-head-right">Latest Report</span>
+              </div>
+              <Link href={`/reports/${latest.date}`} className="block">
+                <div style={{ padding: "32px" }}>
+                  <div className="eyebrow" style={{ marginBottom: "8px" }}>
+                    {formatDate(latest.date)} · 星期{latest.weekday}
                   </div>
-                  <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                    {[{ label: "原油", value: "WTI / Brent" },{ label: "天然气", value: "JKM / LNG" },{ label: "煤炭", value: "动力煤" },{ label: "电力", value: "现货市场" }].map((stat) => (
-                      <div key={stat.label} className="rounded-lg bg-muted px-3 py-2 text-center">
-                        <div className="text-xs text-muted-foreground">{stat.label}</div>
-                        <div className="text-sm font-medium">{stat.value}</div>
+                  <h2 style={{ fontSize: "22px", fontWeight: 700, letterSpacing: "-0.015em", lineHeight: 1.2 }}>
+                    {latest.title}
+                  </h2>
+                  <div
+                    style={{
+                      marginTop: "24px",
+                      display: "grid",
+                      gridTemplateColumns: "repeat(4, 1fr)",
+                      gap: "1px",
+                      background: "var(--line-subtle)",
+                    }}
+                  >
+                    {[
+                      { label: "原油", value: "WTI / Brent" },
+                      { label: "天然气", value: "JKM / TTF / HH" },
+                      { label: "煤炭", value: "CCTD 7 品种" },
+                      { label: "电力", value: "现货市场" },
+                    ].map((stat) => (
+                      <div key={stat.label} style={{ background: "var(--bg)", padding: "16px" }}>
+                        <div className="price-label">{stat.label}</div>
+                        <div className="price-value" style={{ fontSize: "16px", marginTop: "4px" }}>{stat.value}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-5 flex items-center gap-1 text-sm font-medium text-accent">阅读全文 <ChevronRight className="h-4 w-4" /></div>
+                  <div className="flex items-center gap-1 text-[11px] font-medium" style={{ marginTop: "20px", color: "var(--red)" }}>
+                    阅读全文 <ChevronRight className="h-3.5 w-3.5" />
+                  </div>
                 </div>
-              </article>
-            </Link>
+              </Link>
+            </div>
           ) : (
-            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-20 text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted"><Newspaper className="h-8 w-8 text-muted-foreground" /></div>
-              <h3 className="text-lg font-semibold">暂无日报数据</h3>
-              <p className="mt-2 max-w-md text-sm text-muted-foreground">等待数据源接入后，这里将展示最新的一次能源·电力市场联合日报</p>
+            <div className="card">
+              <div className="card-body" style={{ textAlign: "center", padding: "64px 24px" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 600 }}>暂无日报数据</h3>
+                <p className="text-[11px] mt-2" style={{ color: "var(--ink-tertiary)" }}>
+                  等待数据源接入后，这里将展示最新日报
+                </p>
+              </div>
             </div>
           )}
         </div>
-      </div>
-      <div className="flex-1 mx-auto w-full max-w-4xl px-4 sm:px-6 py-8">
+
+        {/* 往期 */}
         {recentReports.length > 0 && (
-          <section>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground"><CalendarDays className="h-4 w-4" />往期日报</h2>
-              <Link href="/reports" className="flex items-center gap-1 text-sm font-medium text-accent hover:underline">查看全部历史<ChevronRight className="h-4 w-4" /></Link>
+          <div className="c-12">
+            <div className="flex items-center justify-between mb-4">
+              <div className="eyebrow">往期日报</div>
+              <Link
+                href="/reports"
+                className="flex items-center gap-1 text-[11px] font-medium transition-colors"
+                style={{ color: "var(--red)" }}
+              >
+                查看全部历史 <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+                gap: "1px",
+                background: "var(--line-subtle)",
+              }}
+            >
               {recentReports.map((report) => (
                 <Link key={report.date} href={`/reports/${report.date}`} className="group block">
-                  <article className="rounded-lg border border-border bg-card p-4 transition-all hover:border-accent/40 hover:shadow-sm">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-medium truncate">{formatDate(report.date)}</h4>
-                        <p className="mt-0.5 text-xs text-muted-foreground">星期{report.weekday}</p>
+                  <article
+                    style={{
+                      background: "var(--bg)",
+                      padding: "16px",
+                      transition: "background 0.15s",
+                    }}
+                    className="hover:bg-[var(--bg-soft)]"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 style={{ fontSize: "13px", fontWeight: 500, color: "var(--ink-primary)" }}>
+                          {formatDate(report.date)}
+                        </h4>
+                        <p className="text-[10px] mt-1" style={{ color: "var(--ink-tertiary)" }}>
+                          星期{report.weekday}
+                        </p>
                       </div>
-                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                      <ChevronRight
+                        className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                        style={{ color: "var(--ink-tertiary)" }}
+                      />
                     </div>
                   </article>
                 </Link>
               ))}
             </div>
-          </section>
+            <div
+              className="text-center text-[10px] mt-4"
+              style={{ color: "var(--ink-tertiary)" }}
+            >
+              共 {reportCount} 期日报 · 数据来源公开市场
+            </div>
+          </div>
         )}
       </div>
     </div>
