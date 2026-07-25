@@ -1,6 +1,6 @@
 # 📊 一次能源·电力市场联合日报
 > **2026年7月25日 星期六** · 交易员三分钟速览 · 煤油气电 + 负荷天气
-> 数据来源: TradingEconomics / SHPGX / CMA 气象 | 抓取时间: 2026-07-25 21:02
+> 数据来源: TradingEconomics / SHPGX / CMA 气象 | 抓取时间: 2026-07-25 21:26
 
 ---
 ## 🛢️ 原油
@@ -16,8 +16,8 @@
 | 品种 | 价格 | 日涨跌 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:------|
 | JKM | **22.0** 美元/百万英热 | ↑ 0.80% | 2026-07-25 | [TradingEconomics](https://zh.tradingeconomics.com/commodity/liquefied-natural-gas-japan-korea) |
-| TTF | **63.14** 美元/百万英热 | ↑ 1.90% | 2026-07-25 | [TradingEconomics](https://tradingeconomics.com/commodity/eu-natural-gas) |
-| Henry Hub | **2.88** 美元/百万英热 | ↓ -1.16% | 2026-07-25 | [TradingEconomics](https://tradingeconomics.com/commodity/natural-gas) |
+| TTF | 今日暂未查询到最新数据 | — | — | — |
+| Henry Hub | 今日暂未查询到最新数据 | — | — | — |
 
 ### 国内市场
 | 指标 | 数值 | 报价日 | 来源 |
@@ -39,7 +39,11 @@
 |:-----|----------:|:-------|:-------|:------|
 | CCTD综合交易5500(平仓价) | **725.0** 元/吨 | ↑ +3.0 | 2026-07-24 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
 | CCTD现货交易5000(平仓价) | **735.0** 元/吨 | ↑ +16.0 | 2026-07-24 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
-| 山西5500(坑口价) | **699.0** 元/吨 | ↑ +53.0 | 2026-06-30 ⚠️数据滞后 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
+| 山西5500(坑口价) | **699.0** 元/吨 | ↑ +53.0 | 2026-06-01 ⚠️数据滞后 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
+| 陕西5500(坑口价) | **619.0** 元/吨 | ↑ +45.0 | 2026-06-01 ⚠️数据滞后 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
+| 蒙西5500(坑口价) | **599.0** 元/吨 | ↑ +37.0 | 2026-06-01 ⚠️数据滞后 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
+| 蒙东3500(坑口价) | **308.0** 元/吨 | → 0 | 2026-06-01 ⚠️数据滞后 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
+| 延安气精煤(出厂价) | **1079.0** 元/吨 | ↓ -21.0 | 2026-07-22 ⚠️数据滞后 | [CCTD](https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520) |
 
 
 ---
@@ -60,20 +64,20 @@
 
 ---
 ## 🌤️ 核心负荷区天气
-> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-07-25 21:13
+> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-07-25 21:26
 
 | 城市 | 天气 | 气温(℃) | 风向风力 |
 |:-----|:-----|:--------|:---------|
-| 🌴 广州 | 雷阵雨 | 25~29 | 北风 |
-| 🌊 杭州 | 小雨 | 🔥 **28~38** | 东南风 |
-| 🌴 南宁 | 阵雨 | 🔥 **24~37** | 南风 |
-| 🌴 福州 | 小雨 | **27~33** | 西北风 |
-| 🌾 石家庄 | 阵雨 | 23~31 | 8.8 km/h |
-| 🏙️ 北京 | 雷阵雨 | 24~31 | 东南风 |
-| 🌊 南京 | 小雨 | 🔥 **26~35** | 东南风 |
-| 🌊 济南 | 雷阵雨 | 23~32 | 东南风 |
-| 🌴 海口 | 雷阵雨 | **26~33** | 西南风 |
-| ❄️ 沈阳 | 晴 | 24~31 | 东南风 |
+| 福州 | 无对应数据 | N/A | N/A |
+| 杭州 | 无对应数据 | N/A | N/A |
+| 南宁 | 无对应数据 | N/A | N/A |
+| 广州 | 无对应数据 | N/A | N/A |
+| 石家庄 | 无对应数据 | N/A | N/A |
+| 济南 | 无对应数据 | N/A | N/A |
+| 南京 | 无对应数据 | N/A | N/A |
+| 北京 | 无对应数据 | N/A | N/A |
+| 沈阳 | 无对应数据 | N/A | N/A |
+| 海口 | 无对应数据 | N/A | N/A |
 
 [查看全国降水图](http://www.nmc.cn/publish/precipitation/1-day.html)
 
@@ -107,4 +111,4 @@
 
 ---
 *免责声明：本日报仅提供数据信息与物理逻辑推演，不构成任何业务建议或交易策略。*
-*生成时间：2026-07-25 21:13 · fetch v6.0 / report v6.0*
+*生成时间：2026-07-25 21:26 · fetch v6.0 / report v6.0*
