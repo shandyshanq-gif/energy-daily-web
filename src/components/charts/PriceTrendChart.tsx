@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo } from "react";
 import {
@@ -29,7 +29,7 @@ const categoryColors: Record<string, string> = {
 export default function PriceTrendChart({ series }: PriceTrendChartProps) {
   const color = categoryColors[series.category] || "#3b82f6";
 
-  const chartData = useMemo(() => {
+  const { chartData, showYear } = useMemo(() => {
     // 计算数据跨度，决定 X 轴显示格式
     const sorted = [...series.data].sort((a, b) => a.date.localeCompare(b.date));
     const spanDays = sorted.length > 1
@@ -37,11 +37,12 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
       : 0;
     const showYear = spanDays > 365;
 
-    return series.data.map((p) => ({
+    const data = series.data.map((p) => ({
       date: showYear ? p.date : p.date.slice(5), // 跨年显示 YYYY-MM-DD，否则 MM-DD
       fullDate: p.date,
       price: p.value,
     }));
+    return { chartData: data, showYear };
   }, [series.data]);
 
   // 计算统计信息
@@ -60,6 +61,8 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
   if (chartData.length < 2) return null;
 
   const unitSuffix = series.unit ? ` ${series.unit}` : "";
+  const xAxisLabel = showYear ? "日期 (YYYY-MM-DD)" : "日期 (MM-DD)";
+  const yAxisLabel = series.unit || "数值";
 
   return (
     <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
@@ -107,7 +110,7 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={chartData}
-              margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+              margin={{ top: 5, right: 20, left: 10, bottom: 20 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
               <XAxis
@@ -115,7 +118,14 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
                 tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
                 axisLine={{ stroke: "var(--border)" }}
                 tickLine={false}
-              />
+              >
+                <Label
+                  value={xAxisLabel}
+                  position="bottom"
+                  offset={10}
+                  style={{ fontSize: 11, fill: "var(--muted-foreground)" }}
+                />
+              </XAxis>
               <YAxis
                 tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
                 axisLine={{ stroke: "var(--border)" }}
@@ -123,14 +133,12 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
                 width={65}
                 domain={["auto", "auto"]}
               >
-                {series.unit && (
-                  <Label
-                    value={series.unit}
-                    position="insideTopRight"
-                    offset={-5}
-                    style={{ fontSize: 10, fill: "var(--muted-foreground)" }}
-                  />
-                )}
+                <Label
+                  value={yAxisLabel}
+                  position="insideTopRight"
+                  offset={-5}
+                  style={{ fontSize: 10, fill: "var(--muted-foreground)" }}
+                />
               </YAxis>
               <Tooltip
                 contentStyle={{
@@ -141,11 +149,11 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
                   fontSize: "13px",
                 }}
                 labelStyle={{ color: "var(--foreground)", fontWeight: 600, marginBottom: 4 }}
-                formatter={(value: number) => [`${value.toFixed(2)}${unitSuffix}`, series.name]}
-                labelFormatter={(label: string, payload: any[]) => {
+                formatter={((value: any) => [`${Number(value).toFixed(2)}${unitSuffix}`, series.name]) as any}
+                labelFormatter={((label: any, payload: any[]) => {
                   const fullDate = payload[0]?.payload?.fullDate || label;
                   return `日期: ${fullDate}`;
-                }}
+                }) as any}
               />
               <Line
                 type="monotone"

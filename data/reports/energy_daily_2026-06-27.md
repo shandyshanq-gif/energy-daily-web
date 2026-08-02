@@ -57,8 +57,8 @@
 
 ### 📰 市场动态
 
-1. 🔴 **【最新政策】《四川省2021年省内电力市场交易总体方..._知乎** —  20小时前 [sogou](/link?url=hedJjaC291OfPyaFZYFLI4KQWvqt63NBzG4tqWA8K6mBNn4nmd-ZEQ..)
-2. 🔴 **华中推进电力市场数字化监管 电力交易证书作用详解_考核内容_行业_...** —  20小时前 [sogou](/link?url=hedJjaC291Ok-E9WTygIKll2MrIoS4vq6QEsspoqEOlSf9FrkwffwrKvMmwj2seg)
+1. 🔴 **【最新政策】《四川省2021年省内电力市场交易总体方..._知乎** —  20小时前 sogou
+2. 🔴 **华中推进电力市场数字化监管 电力交易证书作用详解_考核内容_行业_...** —  20小时前 sogou
 
 
 

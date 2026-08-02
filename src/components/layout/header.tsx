@@ -14,7 +14,7 @@ export function Header() {
     >
       <div
         className="flex h-full items-center justify-between mx-auto"
-        style={{ maxWidth: '1240px', padding: '0 24px' }}
+        style={{ maxWidth: 'var(--max-w)', padding: '0 24px' }}
       >
         <Link href="/" className="flex items-center gap-3 group">
           <span

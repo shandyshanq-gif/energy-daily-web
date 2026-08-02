@@ -1,0 +1,178 @@
+[
+  {
+    "title": "国家能源局",
+    "url": "https://www.nea.gov.cn/",
+    "description": "国家级能源主管部门，政策权威发布。采集频率：政策发布、新闻发布会、权威数据。政策一手源，当日11:00左右首发。（原生抓取）",
+    "category": "政府机关",
+    "level": "S",
+    "carrier": "wechat"
+  },
+  {
+    "title": "国家能源局官网",
+    "url": "https://www.nea.gov.cn/",
+    "description": "nea.gov.cn，政策原文最终溯源源。采集频率：政策原文、发布会实录。（原生抓取）",
+    "category": "政府机关",
+    "level": "S",
+    "carrier": "portal"
+  },
+  {
+    "title": "各级能源局官方公众号",
+    "url": "",
+    "description": "含国家/省级发改委、能源局。采集频率：省级电力政策落地通知、监管周期电价政策。（历史补充）",
+    "category": "政府机关",
+    "level": "S",
+    "carrier": "wechat"
+  },
+  {
+    "title": "广东电力交易中心",
+    "url": "",
+    "description": "区域交易中心代表。采集频率：交易规则修订、市场运行、跨省跨区交易。（原生抓取）",
+    "category": "交易中心",
+    "level": "S",
+    "carrier": "wechat"
+  },
+  {
+    "title": "北京电力交易中心",
+    "url": "",
+    "description": "采集频率：交易规则、全国统一电力市场。（原生抓取）",
+    "category": "交易中心",
+    "level": "S",
+    "carrier": "wechat"
+  },
+  {
+    "title": "各区域电力交易中心官网",
+    "url": "",
+    "description": "权威一手源。采集频率：交易规则公告、市场运行数据、会员通知。（历史补充）",
+    "category": "交易中心",
+    "level": "S",
+    "carrier": "portal"
+  },
+  {
+    "title": "中电联相关公众号",
+    "url": "",
+    "description": "采集频率：行业运行分析、统计快报、市场观察。（历史补充）",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat"
+  },
+  {
+    "title": "电联新媒",
+    "url": "",
+    "description": "中电联旗下，日更新量大。采集频率：行业快讯、深度观察、全球电力市场。（原生抓取）",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "wechat"
+  },
+  {
+    "title": "南方能源观察（eo）",
+    "url": "",
+    "description": "采集频率：深度政策解读、节点电价机制、市场机制研究。（原生抓取）",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "wechat"
+  },
+  {
+    "title": "北极星电力网及子号",
+    "url": "",
+    "description": "含北极星工商业储能等子号。采集频率：综合资讯、储能商业模式、市场快讯。（原生抓取）",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "wechat"
+  },
+  {
+    "title": "中国能源新闻网",
+    "url": "",
+    "description": "采集频率：能源行业综合资讯。（历史补充）",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "portal"
+  },
+  {
+    "title": "央视网",
+    "url": "",
+    "description": "采集频率：能源宏观动态、焦点访谈类。（历史补充）",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "portal"
+  },
+  {
+    "title": "电价观察",
+    "url": "",
+    "description": "政策类重要补充。采集频率：输配电价政策速递、监管周期电价文件。（原生抓取）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "走进电力市场",
+    "url": "",
+    "description": "荆朝霞教授团队。采集频率：市场机制诊断、专家报告整理。（原生抓取）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "鱼眼看电改",
+    "url": "",
+    "description": "采集频率：电改政策演化分析。（原生抓取）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "笨说能源",
+    "url": "",
+    "description": "采集频率：交易机制通俗讲解、跨省跨区交易。（原生抓取）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "储能和虚拟电厂",
+    "url": "",
+    "description": "数据详实。采集频率：虚拟电厂、储能收益测算。（原生抓取）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "广东企业用电优化实战",
+    "url": "",
+    "description": "区域型，贴近实操。采集频率：广东现货市场电价复盘、实操数据。（原生抓取）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "某新电力公众号",
+    "url": "",
+    "description": "候选渠道，样本2篇，最新2026-08-01，已人工确认转正。采集频率：新政策解读。（新增确认）",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat"
+  },
+  {
+    "title": "储能前沿观察",
+    "url": "",
+    "description": "候选渠道，样本1篇，最新2026-07-28，待人工确认。采集频率：储能分析。仅作线索。（新增确认）",
+    "category": "其他",
+    "level": "C",
+    "carrier": "wechat"
+  },
+  {
+    "title": "想想",
+    "url": "",
+    "description": "观点性强，仅作线索。采集频率：播客精选、泛能源趋势。（原生抓取）",
+    "category": "其他",
+    "level": "C",
+    "carrier": "wechat"
+  },
+  {
+    "title": "能化山人",
+    "url": "",
+    "description": "仅作线索。采集频率：泛能源科普。（原生抓取）",
+    "category": "其他",
+    "level": "C",
+    "carrier": "wechat"
+  }
+]

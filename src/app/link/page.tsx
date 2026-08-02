@@ -128,12 +128,8 @@ export default function InfoChannelPage() {
                         {CATEGORY_DESC[cat]}
                       </p>
                     )}
-                    <div
-                      className="grid gap-3"
-                      style={{
-                        gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-                      }}
-                    >
+                    {/* 宽屏自适应渠道网格: 1/2/3/4 栏，消除大量右侧空白 */}
+                    <div className="channel-grid">
                       {items.map((ch, idx) => {
                         const IconComponent = CARRIER_ICONS[ch.carrier] || Database;
                         const isClickable = ch.url && ch.url !== '#';

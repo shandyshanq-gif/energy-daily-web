@@ -1,16 +1,16 @@
 "use client";
 import { useState, useMemo, useEffect, useDeferredValue } from "react";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, RotateCw, ArrowLeft } from "lucide-react";
 import type { ReportMeta } from "@/types/report";
 
 function formatDate(date: string): string {
-  const d = new Date(date);
+  const d = new Date(date + "T00:00:00"); // 加 T00:00:00 避免时区偏移
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 }
 
 function getYearMonth(date: string): string {
-  const d = new Date(date);
+  const d = new Date(date + "T00:00:00");
   return `${d.getFullYear()}年${d.getMonth() + 1}月`;
 }
 
@@ -67,6 +67,9 @@ export default function ReportsPage() {
         return res.json();
       })
       .then((data) => {
+        if (!Array.isArray(data)) {
+          throw new Error("数据格式错误：期望数组");
+        }
         setAllReports(data);
         setLoading(false);
       })
@@ -83,8 +86,15 @@ export default function ReportsPage() {
     return allReports.filter(r => r.date.toLowerCase().includes(q) || r.weekday.toLowerCase().includes(q) || r.title.toLowerCase().includes(q));
   }, [allReports, deferredQuery]);
 
-  const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
-  const paginatedReports = filteredReports.slice((currentPage - 1) * reportsPerPage, currentPage * reportsPerPage);
+  const totalPages = Math.max(1, Math.ceil(filteredReports.length / reportsPerPage));
+
+  // 修复：当搜索过滤导致当前页超出总页数时，自动回到最后一页
+  // 避免出现空白页（例如：在第 3 页搜索后只剩 1 页结果）
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const paginatedReports = filteredReports.slice(
+    (safeCurrentPage - 1) * reportsPerPage,
+    safeCurrentPage * reportsPerPage
+  );
   const grouped = paginatedReports.reduce<Record<string, { reports: ReportMeta[] }>>((acc, r) => {
     const ym = getYearMonth(r.date);
     if (!acc[ym]) acc[ym] = { reports: [] };
@@ -154,6 +164,64 @@ export default function ReportsPage() {
               <div className="card-body" style={{ textAlign: "center", padding: "64px 24px" }}>
                 <h3 style={{ fontSize: "16px", fontWeight: 600 }}>数据加载失败</h3>
                 <p className="text-[11px] mt-2" style={{ color: "var(--ink-tertiary)" }}>{error}</p>
+                {/* 修复：增加重试和返回首页按钮 */}
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "12px",
+                    marginTop: "16px",
+                    justifyContent: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      setLoading(true);
+                      setError(null);
+                      fetch("/data/reports-index.json")
+                        .then((res) => {
+                          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                          return res.json();
+                        })
+                        .then((data) => {
+                          if (!Array.isArray(data)) throw new Error("数据格式错误：期望数组");
+                          setAllReports(data);
+                          setLoading(false);
+                        })
+                        .catch((err) => {
+                          setError(err.message);
+                          setLoading(false);
+                        });
+                    }}
+                    className="source-btn"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      height: "32px",
+                      padding: "0 16px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <RotateCw style={{ width: "12px", height: "12px" }} />
+                    重试
+                  </button>
+                  <Link
+                    href="/"
+                    className="source-btn"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      height: "32px",
+                      padding: "0 16px",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <ArrowLeft style={{ width: "12px", height: "12px" }} />
+                    返回首页
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -162,6 +230,9 @@ export default function ReportsPage() {
             <div className="card">
               <div className="card-body" style={{ textAlign: "center", padding: "64px 24px" }}>
                 <h3 style={{ fontSize: "16px", fontWeight: 600 }}>暂无历史日报</h3>
+                <p className="text-[11px] mt-2" style={{ color: "var(--ink-tertiary)" }}>
+                  日报数据将在构建时自动生成，请确认构建脚本已执行
+                </p>
               </div>
             </div>
           </div>
@@ -236,14 +307,14 @@ export default function ReportsPage() {
               <div className="c-12">
                 <div className="flex items-center justify-center gap-2 mt-4">
                   <button
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(safeCurrentPage - 1)}
+                    disabled={safeCurrentPage === 1}
                     className="source-btn"
                     style={{
                       height: "32px",
                       padding: "0 16px",
-                      cursor: currentPage === 1 ? "not-allowed" : "pointer",
-                      opacity: currentPage === 1 ? 0.3 : 1,
+                      cursor: safeCurrentPage === 1 ? "not-allowed" : "pointer",
+                      opacity: safeCurrentPage === 1 ? 0.3 : 1,
                     }}
                   >
                     ← 上一页
@@ -258,8 +329,8 @@ export default function ReportsPage() {
                           height: "32px",
                           fontSize: "11px",
                           fontWeight: 500,
-                          background: currentPage === page ? "var(--ink-primary)" : "var(--bg)",
-                          color: currentPage === page ? "var(--bg)" : "var(--ink-secondary)",
+                          background: safeCurrentPage === page ? "var(--ink-primary)" : "var(--bg)",
+                          color: safeCurrentPage === page ? "var(--bg)" : "var(--ink-secondary)",
                           border: "1px solid var(--line)",
                           cursor: "pointer",
                         }}
@@ -269,14 +340,14 @@ export default function ReportsPage() {
                     ))}
                   </div>
                   <button
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(safeCurrentPage + 1)}
+                    disabled={safeCurrentPage === totalPages}
                     className="source-btn"
                     style={{
                       height: "32px",
                       padding: "0 16px",
-                      cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-                      opacity: currentPage === totalPages ? 0.3 : 1,
+                      cursor: safeCurrentPage === totalPages ? "not-allowed" : "pointer",
+                      opacity: safeCurrentPage === totalPages ? 0.3 : 1,
                     }}
                   >
                     下一页 →

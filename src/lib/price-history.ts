@@ -1,4 +1,4 @@
-// 历史价格数据提取器 — 从所有日报 Markdown 中提取价格时间序列
+// 历史价格数据提取器 - 从所有日报 Markdown 中提取价格时间序列
 
 import { getAllReports, getReportByDate } from "@/lib/reports";
 import { extractSections, extractPriceTable } from "@/lib/markdown";
@@ -7,7 +7,7 @@ export interface PricePoint {
   date: string;        // YYYY-MM-DD
   value: number;       // 价格数值
   unit: string;        // 单位
-  name: string;        // 品种名称
+  name: string;        // 品种名称（归一化后）
 }
 
 export interface PriceSeries {
@@ -17,20 +17,26 @@ export interface PriceSeries {
   category: string;    // "原油" | "天然气" | "煤炭" | "电力"
 }
 
-// ── 品种白名单（v7.2.0 可信渠道） ──
+// ── 品种白名单（v8.1.0 可信渠道） ──
+// 与日报 Markdown 实际品种名称对齐：
+//   原油: WTI, Brent
+//   天然气: JKM, TTF, Henry Hub（日报中写全称 "Henry Hub"，不是 "HH"）
+//   煤炭: 5500, 5000, 山西坑口（日报中写 "CCTD综合交易5500(平仓价)" 等，需归一化）
 const VALID_SPECIES: Record<string, string[]> = {
   "原油": ["WTI", "Brent"],
-  "天然气": ["JKM", "TTF", "HH"],
+  "天然气": ["JKM", "TTF", "Henry Hub"],
   "煤炭": ["5500", "5000", "山西坑口"],
 };
 
 // ── 单位映射表（硬编码兜底，不从 Markdown 提取） ──
+// 按品种名称（归一化后）映射到标准单位
 const UNIT_MAP: Record<string, string> = {
   "WTI": "美元/桶",
   "Brent": "美元/桶",
   "JKM": "美元/百万英热",
   "TTF": "欧元/兆瓦时",
-  "HH": "美元/百万英热",
+  "Henry Hub": "美元/百万英热",
+  "HH": "美元/百万英热",        // 向后兼容：旧日报可能使用 HH 缩写
   "LNG": "元/吨",
   "5500": "元/吨",
   "5000": "元/吨",
@@ -38,33 +44,71 @@ const UNIT_MAP: Record<string, string> = {
 };
 
 // ── 品种名称归一化 ──
+// 将日报 Markdown 中的原始品种名称映射到白名单中的标准名称，
+// 避免同一品种因写法不同而被拆分成多个时间序列。
 function normalizeName(name: string): string {
   // 去除品类词重复，避免 "WTI原油" 和 "WTI" 分为两个品种
   let n = name.replace(/原油|天然气|煤炭|LNG/g, '').trim();
+
+  // ── 天然气品种归一化 ──
+  // 日报中 "Henry Hub" 和 "HH" 指同一品种，统一为 "Henry Hub"
+  if (n.includes('Henry Hub') || n === 'HH' || n.includes('HH(')) {
+    return 'Henry Hub';
+  }
+
+  // ── 煤炭品种归一化 ──
+  // 日报实际写法：
+  //   "CCTD综合交易5500(平仓价)" → "5500"
+  //   "CCTD现货交易5000(平仓价)" → "5000"
+  //   "山西5500(坑口价)"        → "山西坑口"
+  // 必须先匹配 "山西" + "坑口"，否则 "山西5500" 会被 "5500" 误匹配
+  if (n.includes('坑口') || n.includes('山西')) {
+    return '山西坑口';
+  }
+  if (n.includes('5500')) {
+    return '5500';
+  }
+  if (n.includes('5000')) {
+    return '5000';
+  }
+
   // 如果去除后为空，返回原名
   return n || name;
 }
 
 // ── 品种有效性校验 ──
+// 检查归一化后的品种名称是否在白名单中
 function isValidSpecies(category: string, name: string): boolean {
   const allowed = VALID_SPECIES[category];
   if (!allowed) return false;
-  return allowed.some(s => name.includes(s));
+  // 精确匹配（归一化后的名称应与白名单条目一致）
+  return allowed.includes(name);
 }
 
 // ── 单位推断 ──
+// 根据归一化后的品种名称推断单位
 function inferUnit(name: string): string {
+  // 精确匹配优先
+  if (UNIT_MAP[name]) return UNIT_MAP[name];
+  // 模糊匹配兜底
   for (const [key, unit] of Object.entries(UNIT_MAP)) {
     if (name.includes(key)) return unit;
   }
   return "";
 }
 
-// 从表格行中提取价格数值
+// 从表格单元格中提取价格数值
+// 输入示例：
+//   "**84.67**"             → 84.67
+//   "**21.45** 美元/百万英热" → 21.45
+//   "**725.0** 元/吨"        → 725.0
+//   "5612"                   → 5612
+//   "-> 0"                   → null（非价格列，返回 null）
+//   "↑ 1.29%"               → 1.29（如果误入价格列，仍可提取数值）
 function extractNumericPrice(cell: string): number | null {
-  // 移除格式化字符：箭头、粗体、货币符号等
+  // 移除格式化字符：箭头、粗体标记、货币符号等
   const cleaned = cell
-    .replace(/[↑↓▲▼*_]/g, '')
+    .replace(/[↑↓▲▼*_$€]/g, '')
     .replace(/,/g, '')
     .trim();
   
@@ -95,7 +139,7 @@ function extractPricesFromReport(
 
   for (const section of sections) {
     const category = detectCategory(section.heading);
-    if (category === "电力") continue; // 电力板块通常没有标准化价格表格
+    if (category === "电力" || category === "其他") continue; // 电力板块通常没有标准化价格表格
 
     // 提取表格
     const lines = section.content.split("\n");
@@ -125,7 +169,7 @@ function extractPricesFromReport(
         if (!name) continue;
         
         const normalized = normalizeName(name);
-        // 跳过废弃品种
+        // 跳过不在白名单中的品种
         if (!isValidSpecies(category, normalized)) continue;
 
         // 尝试第二列作为价格
@@ -145,7 +189,7 @@ function extractPricesFromReport(
         if (!name) continue;
         
         const normalized = normalizeName(name);
-        // 跳过废弃品种
+        // 跳过不在白名单中的品种
         if (!isValidSpecies(category, normalized)) continue;
 
         const priceVal = priceColIdx >= 0 ? extractNumericPrice(row[priceColIdx]) : null;

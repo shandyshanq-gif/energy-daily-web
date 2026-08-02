@@ -1,0 +1,118 @@
+{
+  "scan_date": "2026-08-02T03:50:06.419Z",
+  "mode": "fix",
+  "reports_dir": "C:\\Users\\12866\\Desktop\\WorkBuddy\\energy-daily-project-20260621\\energy-daily-web\\data\\reports",
+  "summary": {
+    "files_scanned": 33,
+    "files_modified": 5,
+    "total_links_scanned": 535,
+    "total_links_fixed": 13,
+    "remaining_issues": 0
+  },
+  "fixes": [
+    {
+      "file": "energy_daily_2026-06-22.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291MxGeA-SVBACwNdbrwv1ozqnY8kqmjk2QVYEjW4L09UpI0isyOvvbHZJWzzAGMH9uU.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 63
+    },
+    {
+      "file": "energy_daily_2026-06-22.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291PD0T3DYzJqFDoBhFbePHvernilvTOuwmmW6M51sFg3FfAzCyj_5jdZOlUxiPcqJkI.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 64
+    },
+    {
+      "file": "energy_daily_2026-06-23.md",
+      "text": "来源",
+      "url": "#",
+      "reason": "anchor_hash",
+      "suggestion": "降级为纯文本",
+      "line": 9
+    },
+    {
+      "file": "energy_daily_2026-06-23.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291NDxZ6Wyr6RTjPtO-BpbkehisCNzQnR-MKI_0BoDnj4rcuQiqPXJr-YrTaQG2WG3V4.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 60
+    },
+    {
+      "file": "energy_daily_2026-06-23.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291NDxZ6Wyr6RTjPtO-BpbkehisCNzQnR-MKI_0BoDnj4rZo1VvMvgW1UnG4bmeiRpUU.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 61
+    },
+    {
+      "file": "energy_daily_2026-06-27.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291OfPyaFZYFLI4KQWvqt63NBzG4tqWA8K6mBNn4nmd-ZEQ..",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 60
+    },
+    {
+      "file": "energy_daily_2026-06-27.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291Ok-E9WTygIKll2MrIoS4vq6QEsspoqEOlSf9FrkwffwrKvMmwj2seg",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 61
+    },
+    {
+      "file": "energy_daily_2026-07-02.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291MzQfXru4l8gydQRoztLvNXnI1dn3Sb8O26gf603GTg9FrmVMb5IroftsCnpVGpPpA.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 60
+    },
+    {
+      "file": "energy_daily_2026-07-06.md",
+      "text": "来源",
+      "url": "#",
+      "reason": "anchor_hash",
+      "suggestion": "降级为纯文本",
+      "line": 9
+    },
+    {
+      "file": "energy_daily_2026-07-06.md",
+      "text": "来源",
+      "url": "#",
+      "reason": "anchor_hash",
+      "suggestion": "降级为纯文本",
+      "line": 10
+    },
+    {
+      "file": "energy_daily_2026-07-06.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291PD0T3DYzJqFDoBhFbePHvernilvTOuwmlaQZR3Ti7R9cuyyrcz8Ic4mnFwgvRwsqk.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 45
+    },
+    {
+      "file": "energy_daily_2026-07-06.md",
+      "text": "sogou",
+      "url": "/link?url=44aejrzSKwWSP5CPN6_6fHKjXrQpquXiHV4pv1mJENMs8HV8jaGtaA__gkm2NsVvFDz2xbOXdiA.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 46
+    },
+    {
+      "file": "energy_daily_2026-07-06.md",
+      "text": "sogou",
+      "url": "/link?url=hedJjaC291MzQfXru4l8gydQRoztLvNXnI1dn3Sb8O26gf603GTg9FrmVMb5IroftsCnpVGpPpA.",
+      "reason": "sogou_redirect",
+      "suggestion": "降级为纯文本",
+      "line": 48
+    }
+  ]
+}

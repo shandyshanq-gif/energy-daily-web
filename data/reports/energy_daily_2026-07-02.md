@@ -57,7 +57,7 @@
 
 ### 📰 市场动态
 
-1. 🔴 **浙江拟调整2024年电力市场化交易政策-北极星电力市场网** —  17小时前 [sogou](/link?url=hedJjaC291MzQfXru4l8gydQRoztLvNXnI1dn3Sb8O26gf603GTg9FrmVMb5IroftsCnpVGpPpA.)
+1. 🔴 **浙江拟调整2024年电力市场化交易政策-北极星电力市场网** —  17小时前 sogou
 
 
 

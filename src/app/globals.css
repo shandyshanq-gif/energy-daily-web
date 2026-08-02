@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* =====================================================
-   瑞士极简 v1.2 — 完整设计令牌（来自 UI 设计师 HTML）
+   瑞士极简 v1.3 - 宽屏排版适配（PRD 需求四）
    ===================================================== */
 :root {
   --bg: #FFFFFF;
@@ -16,7 +16,8 @@
   --red: #E10600;
   --red-dim: #FEE2E2;
   --font: 'Inter', 'Helvetica Neue', system-ui, -apple-system, 'PingFang SC', sans-serif;
-  --max-w: 1240px;
+  /* 宽屏基底: 1240 -> 1480, 大屏可达 1760 */
+  --max-w: 1480px;
 
   /* Tailwind 兼容 */
   --background: var(--bg);
@@ -196,6 +197,54 @@ body {
 .site-footer { max-width: var(--max-w); margin: 0 auto; padding: 24px; border-top: 1px solid var(--line); font-size: 10px; color: var(--ink-tertiary); display: flex; justify-content: space-between; }
 
 .channel-link:hover { border-left-color: var(--red) !important; background: var(--bg-soft) !important; }
+
+/* ===== Dashboard Chart Grid (宽屏适配) ===== */
+.dashboard-chart-grid {
+  display: grid;
+  grid-template-columns: 1fr;           /* 移动端单栏 */
+  gap: 24px;
+}
+/* 中屏 ≥768px: 2 栏 */
+@media (min-width: 768px) {
+  .dashboard-chart-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* 宽屏 ≥1280px: 3 栏（单图表最小 ~400px，容器内 ~1200px / 3 ≈ 400px） */
+@media (min-width: 1280px) {
+  .dashboard-chart-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* 大屏 ≥1920px: 提升容器宽度 + 4 栏图表（容器内 ~1712px / 4 ≈ 428px > 400px） */
+@media (min-width: 1920px) {
+  :root { --max-w: 1760px; }
+  .dashboard-chart-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===== 信息渠道网格 (宽屏适配) ===== */
+.channel-grid {
+  display: grid;
+  grid-template-columns: 1fr;           /* 移动端单栏 */
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .channel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .channel-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1480px) {
+  .channel-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {

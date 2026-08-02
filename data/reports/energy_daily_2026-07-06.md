@@ -6,8 +6,8 @@
 ## 🛢️ 原油
 | 品种 | 价格(美元/桶) | 日涨跌 | 月涨跌 | 同比 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:-----|:-------|:------|
-| WTI | **None** | → N/A | — | — |  | [来源](#) |
-| Brent | **None** | → N/A | — | — |  | [来源](#) |
+| WTI | **None** | → N/A | — | — |  | 来源 |
+| Brent | **None** | → N/A | — | — |  | 来源 |
 
 > 📝 **点评**: WTI报0美元/桶，持平。Brent-WTI价差约0.00美元。低油价环境下火电成本压力较小。
 
@@ -42,10 +42,10 @@
 
 ### 📰 市场动态
 
-1. 🔴 **国家发改委出新规啦!电力市场计量结算将有大变化 -今日头条** —  15小时前 [sogou](/link?url=hedJjaC291PD0T3DYzJqFDoBhFbePHvernilvTOuwmlaQZR3Ti7R9cuyyrcz8Ic4mnFwgvRwsqk.)
-2. 🔴 **国家能源局关于印发《电力市场注册基本规则》的通知-国家能源局网站** —  15小时前 [sogou](/link?url=44aejrzSKwWSP5CPN6_6fHKjXrQpquXiHV4pv1mJENMs8HV8jaGtaA__gkm2NsVvFDz2xbOXdiA.)
+1. 🔴 **国家发改委出新规啦!电力市场计量结算将有大变化 -今日头条** —  15小时前 sogou
+2. 🔴 **国家能源局关于印发《电力市场注册基本规则》的通知-国家能源局网站** —  15小时前 sogou
 3. 🔴 **在中山市搜索市场交易- 腾讯地图** —  15小时前 [sogou](https://apis.map.qq.com/uri/v1/search?keyword=%E5%B8%82%E5%9C%BA%E4%BA%A4%E6%98%93&region=%E4%B8%AD%E5%B1%B1%E5%B8%82&referer=TXZBZ-JFC3P-4NPDJ-L2U3C-VHY7K-NWF4U&init_view=2)
-4. 🔴 **浙江拟调整2024年电力市场化交易政策-北极星电力市场网** —  15小时前 [sogou](/link?url=hedJjaC291MzQfXru4l8gydQRoztLvNXnI1dn3Sb8O26gf603GTg9FrmVMb5IroftsCnpVGpPpA.)
+4. 🔴 **浙江拟调整2024年电力市场化交易政策-北极星电力市场网** —  15小时前 sogou
 5. 🔴 **市场交易100条实战经验!** —  15小时前 [sogou](http://mp.weixin.qq.com/s?src=11&timestamp=1783322615&ver=6825&signature=pnbvXZcuH3wMedEUrWOIchCMOWOS8QTes1NHojX*p4ao6xnxEGWqniu3T4YzHWh1Cd*EcZAv7LffzditMn3gtn44YsNameTVHbGpf0nGMHMPNX-gRcSTgNFK1YE4Siu6&new=1)
 
 
