@@ -1,8 +1,7 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useDeferredValue } from "react";
 import Link from "next/link";
-import { ArrowLeft, Search } from "lucide-react";
-import { getAllReports } from "@/lib/reports";
+import { Search } from "lucide-react";
 import type { ReportMeta } from "@/types/report";
 
 function formatDate(date: string): string {
@@ -15,17 +14,75 @@ function getYearMonth(date: string): string {
   return `${d.getFullYear()}年${d.getMonth() + 1}月`;
 }
 
+function LoadingSkeleton() {
+  return (
+    <div className="flex flex-col min-h-full">
+      <div className="masthead">
+        <div>
+          <div className="masthead-issue">Archive</div>
+          <h1>历史归档</h1>
+        </div>
+      </div>
+      <div className="content">
+        <div className="c-12">
+          <div className="card">
+            <div className="card-body" style={{ padding: "16px" }}>
+              <div className="h-10 bg-[var(--bg-soft)] animate-pulse rounded" />
+            </div>
+          </div>
+        </div>
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div className="c-12" key={i}>
+            <div className="card">
+              <div className="card-body" style={{ padding: "20px" }}>
+                <div className="h-4 w-24 bg-[var(--bg-soft)] animate-pulse rounded mb-3" />
+                <div className="grid grid-cols-3 gap-1">
+                  {Array.from({ length: 4 }).map((_, j) => (
+                    <div key={j} className="h-16 bg-[var(--bg-soft)] animate-pulse rounded" />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ReportsPage() {
+  const [allReports, setAllReports] = useState<ReportMeta[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const deferredQuery = useDeferredValue(searchQuery);
   const reportsPerPage = 12;
-  const allReports = useMemo(() => getAllReports(), []);
+
+  useEffect(() => {
+    fetch("/data/reports-index.json")
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        setAllReports(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
   const totalCount = allReports.length;
   const filteredReports = useMemo(() => {
-    if (!searchQuery.trim()) return allReports;
-    const q = searchQuery.toLowerCase();
+    if (!deferredQuery.trim()) return allReports;
+    const q = deferredQuery.toLowerCase();
     return allReports.filter(r => r.date.toLowerCase().includes(q) || r.weekday.toLowerCase().includes(q) || r.title.toLowerCase().includes(q));
-  }, [allReports, searchQuery]);
+  }, [allReports, deferredQuery]);
+
   const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
   const paginatedReports = filteredReports.slice((currentPage - 1) * reportsPerPage, currentPage * reportsPerPage);
   const grouped = paginatedReports.reduce<Record<string, { reports: ReportMeta[] }>>((acc, r) => {
@@ -40,6 +97,8 @@ export default function ReportsPage() {
     return bY - aY || bM - aM;
   });
 
+  if (loading) return <LoadingSkeleton />;
+
   return (
     <div className="flex flex-col min-h-full">
       {/* Masthead */}
@@ -47,7 +106,11 @@ export default function ReportsPage() {
         <div>
           <div className="masthead-issue">Archive</div>
           <h1>历史归档</h1>
-          <div className="masthead-meta">共 {totalCount} 期日报</div>
+          <div className="masthead-meta">
+            {error
+              ? "数据加载失败"
+              : `共 ${totalCount} 期日报`}
+          </div>
         </div>
         <Link href="/" className="masthead-btn">← 返回首页</Link>
       </div>
@@ -85,7 +148,16 @@ export default function ReportsPage() {
           </div>
         </div>
 
-        {totalCount === 0 ? (
+        {error ? (
+          <div className="c-12">
+            <div className="card">
+              <div className="card-body" style={{ textAlign: "center", padding: "64px 24px" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 600 }}>数据加载失败</h3>
+                <p className="text-[11px] mt-2" style={{ color: "var(--ink-tertiary)" }}>{error}</p>
+              </div>
+            </div>
+          </div>
+        ) : totalCount === 0 ? (
           <div className="c-12">
             <div className="card">
               <div className="card-body" style={{ textAlign: "center", padding: "64px 24px" }}>

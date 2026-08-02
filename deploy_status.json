@@ -1,0 +1,5 @@
+{
+  "ts": "2026-08-01T19:49:08",
+  "status": "WARN",
+  "detail": "pull --rebase 失败，降级跳过校验"
+}

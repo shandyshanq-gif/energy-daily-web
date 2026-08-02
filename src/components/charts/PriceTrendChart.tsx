@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Label,
 } from "recharts";
 import { TrendingUp } from "lucide-react";
 import type { PriceSeries } from "@/lib/price-history";
@@ -29,8 +30,15 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
   const color = categoryColors[series.category] || "#3b82f6";
 
   const chartData = useMemo(() => {
+    // 计算数据跨度，决定 X 轴显示格式
+    const sorted = [...series.data].sort((a, b) => a.date.localeCompare(b.date));
+    const spanDays = sorted.length > 1
+      ? (new Date(sorted[sorted.length - 1].date).getTime() - new Date(sorted[0].date).getTime()) / 86400000
+      : 0;
+    const showYear = spanDays > 365;
+
     return series.data.map((p) => ({
-      date: p.date.slice(5), // MM-DD
+      date: showYear ? p.date : p.date.slice(5), // 跨年显示 YYYY-MM-DD，否则 MM-DD
       fullDate: p.date,
       price: p.value,
     }));
@@ -51,6 +59,8 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
 
   if (chartData.length < 2) return null;
 
+  const unitSuffix = series.unit ? ` ${series.unit}` : "";
+
   return (
     <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
       {/* Header */}
@@ -68,7 +78,7 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
         {stats && (
           <div className="flex items-center gap-3 text-xs">
             <span className="text-muted-foreground">
-              最新: <strong className="text-foreground">{stats.last.toFixed(2)}</strong>
+              最新: <strong className="text-foreground">{stats.last.toFixed(2)}{unitSuffix}</strong>
             </span>
             <span
               className={`font-medium ${
@@ -93,7 +103,7 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
 
       {/* Chart */}
       <div className="p-4">
-        <div className="h-64">
+        <div className="h-48 lg:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={chartData}
@@ -110,9 +120,18 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
                 tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
                 axisLine={{ stroke: "var(--border)" }}
                 tickLine={false}
-                width={60}
+                width={65}
                 domain={["auto", "auto"]}
-              />
+              >
+                {series.unit && (
+                  <Label
+                    value={series.unit}
+                    position="insideTopRight"
+                    offset={-5}
+                    style={{ fontSize: 10, fill: "var(--muted-foreground)" }}
+                  />
+                )}
+              </YAxis>
               <Tooltip
                 contentStyle={{
                   backgroundColor: "var(--card)",
@@ -122,8 +141,11 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
                   fontSize: "13px",
                 }}
                 labelStyle={{ color: "var(--foreground)", fontWeight: 600, marginBottom: 4 }}
-                formatter={(value) => [Number(value).toFixed(2), series.name] as [string, string]}
-                labelFormatter={(label) => `日期: ${label}`}
+                formatter={(value: number) => [`${value.toFixed(2)}${unitSuffix}`, series.name]}
+                labelFormatter={(label: string, payload: any[]) => {
+                  const fullDate = payload[0]?.payload?.fullDate || label;
+                  return `日期: ${fullDate}`;
+                }}
               />
               <Line
                 type="monotone"
@@ -142,10 +164,10 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
       {stats && (
         <div className="grid grid-cols-4 gap-px bg-border">
           {[
-            { label: "起始", value: stats.first.toFixed(2) },
-            { label: "最新", value: stats.last.toFixed(2) },
-            { label: "最低", value: stats.min.toFixed(2) },
-            { label: "最高", value: stats.max.toFixed(2) },
+            { label: "起始", value: `${stats.first.toFixed(2)}${unitSuffix}` },
+            { label: "最新", value: `${stats.last.toFixed(2)}${unitSuffix}` },
+            { label: "最低", value: `${stats.min.toFixed(2)}${unitSuffix}` },
+            { label: "最高", value: `${stats.max.toFixed(2)}${unitSuffix}` },
           ].map((item) => (
             <div key={item.label} className="bg-card px-3 py-2.5 text-center">
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">

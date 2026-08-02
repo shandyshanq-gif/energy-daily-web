@@ -1,4 +1,7 @@
 // API客户端
+// ⚠️ 死代码冻结：本项目为静态导出（output: "export"），无 API 服务器
+// 所有函数均不会在生产环境中被调用，保留仅供参考
+// 不删除以保持历史记录，但不要修改或依赖此文件
 
 import type { ApiResponse, ReportListResponse, ReportDetailResponse, HealthResponse } from "@/types/api";
 import type { ReportMeta, Report } from "@/types/report";

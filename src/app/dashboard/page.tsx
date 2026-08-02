@@ -56,7 +56,7 @@ export default function DashboardPage() {
                     <span className="card-head-right">{series.length} 个价格序列</span>
                   </div>
                   <div className="card-body" style={{ padding: "24px" }}>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {series.map((s) => (
                         <PriceTrendChart key={s.name} series={s} />
                       ))}

@@ -31,8 +31,27 @@ function formatDate(date: string): string {
 
 /** 从 markdown cell 提取链接 [text](url) */
 function extractLink(cell: string): { text: string; url: string } | null {
-  const m = cell.match(/\[([^\]]+)\]\(([^)]+)\)/);
-  return m ? { text: m[1], url: m[2] } : null;
+  // 排除图片链接 ![alt](url)
+  if (cell.startsWith("![")) return null;
+
+  // 匹配 [text](url) 或 [text](url "title")
+  const m = cell.match(/\[([^\]]+)\]\(([\s\S]*?)\)/);
+  if (!m) return null;
+
+  let url = m[2].trim();
+
+  // 处理 [text](url "title") 格式
+  const titleMatch = url.match(/^(\S+)\s+"[^"]*"$/);
+  if (titleMatch) url = titleMatch[1];
+
+  // URL 合法性校验（使用 new URL()，比正则更可靠）
+  try {
+    const parsed = new URL(url);
+    if (!["http:", "https:"].includes(parsed.protocol)) return null;
+    return { text: m[1], url };
+  } catch {
+    return null; // 非法 URL，降级为纯文本
+  }
 }
 
 /** 清理 markdown 粗体/emoji */
