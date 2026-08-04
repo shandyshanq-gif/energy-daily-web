@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-03T09:08:53",
+  "ts": "2026-08-04T10:46:01",
   "status": "WARN",
   "detail": "fetch 失败（疑似 sandbox 网络阻断），跳过基底校验，直接尝试 push；若 push 失败将走 Contents API 兜底"
 }
