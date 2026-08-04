@@ -220,7 +220,7 @@ export function extractPolicies(
   // IMPORTANT: Use \p{Emoji_Presentation} with u flag instead of [⚪🟡🔴] character class
   // because JavaScript regex engine has compatibility issues with surrogate-pair emoji in character classes
   const regex =
-    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
+    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[-–\u2014]+\s*(.*?)\s+(发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
   let match;
   while ((match = regex.exec(policySection[0])) !== null) {
     policies.push({
@@ -253,7 +253,7 @@ export function extractMarketNews(
   // IMPORTANT: Use \p{Emoji_Presentation} with u flag instead of [⚪🟡🔴] character class
   // because JavaScript regex engine has compatibility issues with surrogate-pair emoji in character classes
   const regex =
-    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[—–-]+\s*(.*?)\s+(发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
+    /\d+\.\s+\p{Emoji_Presentation}\s+\*\*(.+?)\*\*\s*[-–\u2014]+\s*(.*?)\s+(发布时间：\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?（[^）]+）|\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?|\d+(?:小时|天)前)\s*\[([^\]]+)\]\(([^)]+)\)/gu;
   let match;
   while ((match = regex.exec(newsSection[0])) !== null) {
     news.push({
