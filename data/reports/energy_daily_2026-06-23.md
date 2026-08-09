@@ -6,7 +6,7 @@
 ## 🛢️ 原油
 | 品种 | 价格(美元/棶) | 日涨跌 | 月涨跌 | 同比 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:-----|:-------|:------|
-| WTI | **None** | — N/A | — | — |  | 来源 |
+| WTI | **None** | — N/A | — | — |  | [来源](#) |
 | Brent | **77.95** | ↑ 0.07% | -19.36% | 16.10% | 2026-06-23 | [TradingEconomics](https://tradingeconomics.com/commodity/brent-crude-oil) |
 
 > 📝 **点评**: WTI报0美元/棶，持平。Brent-WTI价差约77.95美元。低油价环境下火电成本压力较小。
@@ -57,8 +57,8 @@
 
 ### 📰 市场动态
 
-1. 🔴 **国家能源局就《电力市场监管办法》答记者问_政策解读_中国政府网** —  8小时前 sogou
-2. 🔴 **国家能源局就《电力市场运行基本规则》答记者..._政策解读_中国政府网** —  8小时前 sogou
+1. 🔴 **国家能源局就《电力市场监管办法》答记者问_政策解读_中国政府网** —  8小时前 [sogou](/link?url=hedJjaC291NDxZ6Wyr6RTjPtO-BpbkehisCNzQnR-MKI_0BoDnj4rcuQiqPXJr-YrTaQG2WG3V4.)
+2. 🔴 **国家能源局就《电力市场运行基本规则》答记者..._政策解读_中国政府网** —  8小时前 [sogou](/link?url=hedJjaC291NDxZ6Wyr6RTjPtO-BpbkehisCNzQnR-MKI_0BoDnj4rZo1VvMvgW1UnG4bmeiRpUU.)
 
 
 

@@ -16,7 +16,7 @@
 | 品种 | 价格 | 日涨跌 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:------|
 | JKM | **21.26** 美元/百万英热 | ↓ -0.91% | 2026-08-04 | [TradingEconomics](https://tradingeconomics.com/commodity/liquefied-natural-gas-japan-korea) |
-| TTF | **58.17** 欧元/兆瓦时 | ↑ 1.16% | 2026-08-04 | [TradingEconomics](https://tradingeconomics.com/commodity/eu-natural-gas) |
+| TTF | **55.92** 欧元/兆瓦时 | ↑ 1.16% | 2026-08-04 | [TradingEconomics](https://tradingeconomics.com/commodity/eu-natural-gas) |
 | Henry Hub | **2.77** 美元/百万英热 | ↓ -0.35% | 2026-08-04 | [TradingEconomics](https://tradingeconomics.com/commodity/natural-gas) |
 
 ### 国内市场

@@ -61,14 +61,18 @@ function normalizeName(name: string): string {
   //   "CCTD综合交易5500(平仓价)" → "5500"
   //   "CCTD现货交易5000(平仓价)" → "5000"
   //   "山西5500(坑口价)"        → "山西坑口"
-  // 必须先匹配 "山西" + "坑口"，否则 "山西5500" 会被 "5500" 误匹配
-  if (n.includes('坑口') || n.includes('山西')) {
-    return '山西坑口';
+  //   "陕西/蒙西/蒙东5500(坑口价)" → 不在白名单，返回原名由 isValidSpecies 过滤
+  //   "动力煤(Q5500)"             → 不在白名单（TradingEconomics 旧数据源），返回原名过滤
+  // 顺序：坑口类优先拦截 → 5500/5000 只匹配CCTD平仓价品种
+  if (n.includes('坑口')) {
+    if (n.includes('山西')) return '山西坑口';
+    return n; // 陕西/蒙西/蒙东等坑口品种，不在白名单，将被过滤
   }
-  if (n.includes('5500')) {
+  // 只匹配 CCTD 品种（平仓价），排除"动力煤(Q5500)"等非 CCTD 数据源
+  if (n.includes('5500') && n.includes('CCTD')) {
     return '5500';
   }
-  if (n.includes('5000')) {
+  if (n.includes('5000') && n.includes('CCTD')) {
     return '5000';
   }
 

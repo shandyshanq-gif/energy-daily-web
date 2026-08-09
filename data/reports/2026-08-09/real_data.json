@@ -1,0 +1,777 @@
+{
+  "fetch_time": "2026-08-09 23:44",
+  "fetch_version": "8.4.0",
+  "date": "2026-08-09",
+  "crude": [
+    {
+      "symbol": "WTI",
+      "price": 78.18,
+      "daily_change": "1.15%",
+      "monthly_change": "6.34%",
+      "yoy_change": "22.39%",
+      "date": "2026-08-09",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/crude-oil",
+      "unit": "USD/barrel"
+    },
+    {
+      "symbol": "Brent",
+      "price": 83.55,
+      "daily_change": "1.29%",
+      "monthly_change": "7.09%",
+      "yoy_change": "25.47%",
+      "date": "2026-08-09",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/brent-crude-oil",
+      "unit": "USD/barrel"
+    }
+  ],
+  "jkm": {
+    "price": 21.12,
+    "daily_change": "-0.12%",
+    "monthly_change": "27.89%",
+    "date": "2026-08-09",
+    "source": "TradingEconomics",
+    "url": "https://tradingeconomics.com/commodity/liquefied-natural-gas-japan-korea",
+    "unit": "USD/MMBtu",
+    "ref": "Aug/07"
+  },
+  "global_gas": {
+    "jkm": {
+      "price": 21.12,
+      "daily_change": "-0.12%",
+      "monthly_change": "27.89%",
+      "date": "2026-08-09",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/liquefied-natural-gas-japan-korea",
+      "unit": "USD/MMBtu",
+      "ref": "Aug/07"
+    },
+    "ttf": {
+      "price": 55.55,
+      "daily_change": "-0.40%",
+      "monthly_change": "12.91%",
+      "date": "2026-08-09",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/eu-natural-gas",
+      "unit": "EUR/MWh",
+      "ref": "Aug/07"
+    },
+    "henry_hub": {
+      "price": 2.66,
+      "daily_change": "0.83%",
+      "monthly_change": "-17.12%",
+      "date": "2026-08-09",
+      "source": "TradingEconomics",
+      "url": "https://tradingeconomics.com/commodity/natural-gas",
+      "unit": "USD/MMBtu",
+      "ref": "Aug/07"
+    },
+    "_success_count": 3
+  },
+  "coal": [
+    {
+      "name": "CCTD综合交易5500",
+      "price": 726.0,
+      "price_unit": "元/吨",
+      "price_type": "平仓价",
+      "daily_change": "+1.0",
+      "monthly_change": null,
+      "date": "2026-08-07",
+      "stale": false,
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "CCTD现货交易5000",
+      "price": 749.0,
+      "price_unit": "元/吨",
+      "price_type": "平仓价",
+      "daily_change": "+13.0",
+      "monthly_change": null,
+      "date": "2026-08-07",
+      "stale": false,
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    },
+    {
+      "name": "山西5500",
+      "price": 716.0,
+      "price_unit": "元/吨",
+      "price_type": "坑口价",
+      "daily_change": "+17.0",
+      "monthly_change": null,
+      "date": "2026-07-31",
+      "stale": true,
+      "source": "CCTD中国煤炭市场网",
+      "url": "https://www.cctd.com.cn/index.php?m=content&c=index&a=lists&catid=520"
+    }
+  ],
+  "weather": [
+    {
+      "city": "杭州",
+      "region": "华东",
+      "weather": "小雨",
+      "temp_low": 23,
+      "temp_high": 27,
+      "wind": "东北风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "福州",
+      "region": "华南",
+      "weather": "小雨",
+      "temp_low": 28,
+      "temp_high": 32,
+      "wind": "无持续风向",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "南宁",
+      "region": "华南",
+      "weather": "阵雨",
+      "temp_low": 26,
+      "temp_high": 37,
+      "wind": "东南风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "广州",
+      "region": "华南",
+      "weather": "小雨",
+      "temp_low": 27,
+      "temp_high": 36,
+      "wind": "无持续风向",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "南京",
+      "region": "华东",
+      "weather": "小雨",
+      "temp_low": 24,
+      "temp_high": 27,
+      "wind": "东北风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "济南",
+      "region": "华东",
+      "weather": "雷阵雨",
+      "temp_low": 23,
+      "temp_high": 33,
+      "wind": "东北风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "石家庄",
+      "region": "华北",
+      "weather": "多云",
+      "temp_low": 22,
+      "temp_high": 34,
+      "wind": "1-2级",
+      "source": "Open-Meteo",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "北京",
+      "region": "京津",
+      "weather": "雷阵雨",
+      "temp_low": 21,
+      "temp_high": 33,
+      "wind": "东北风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "沈阳",
+      "region": "东北",
+      "weather": "雷阵雨",
+      "temp_low": 23,
+      "temp_high": 34,
+      "wind": "西南风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    },
+    {
+      "city": "海口",
+      "region": "华南",
+      "weather": "雷阵雨",
+      "temp_low": 27,
+      "temp_high": 33,
+      "wind": "西风",
+      "source": "NMC",
+      "_cache_date": "2026-08-09"
+    }
+  ],
+  "lng": {
+    "national": {
+      "price": 5578.5625,
+      "date": "2026-08-09"
+    },
+    "regions": [
+      {
+        "name": "内蒙古",
+        "price": 5426.0,
+        "cd": "8"
+      },
+      {
+        "name": "陕西",
+        "price": 5361.0,
+        "cd": "9"
+      },
+      {
+        "name": "广东",
+        "price": 5753.0,
+        "cd": "10"
+      },
+      {
+        "name": "山西",
+        "price": 5306.0,
+        "cd": "11"
+      },
+      {
+        "name": "福建",
+        "price": 5750.0,
+        "cd": "12"
+      },
+      {
+        "name": "新疆",
+        "price": 5450.0,
+        "cd": "13"
+      },
+      {
+        "name": "山东",
+        "price": 5567.0,
+        "cd": "14"
+      },
+      {
+        "name": "京津冀",
+        "price": 5357.0,
+        "cd": "15"
+      },
+      {
+        "name": "江苏",
+        "price": 6070.0,
+        "cd": "16"
+      },
+      {
+        "name": "四川",
+        "price": 5194.0,
+        "cd": "17"
+      },
+      {
+        "name": "东北",
+        "price": 5476.0,
+        "cd": "18"
+      },
+      {
+        "name": "大连市(中石油)",
+        "price": 5550.0,
+        "cd": "42"
+      },
+      {
+        "name": "浙江",
+        "price": 5948.0,
+        "cd": "19"
+      },
+      {
+        "name": "河南",
+        "price": 5421.0,
+        "cd": "20"
+      },
+      {
+        "name": "宁夏",
+        "price": 5515.0,
+        "cd": "21"
+      },
+      {
+        "name": "海南",
+        "price": 6113.0,
+        "cd": "27"
+      }
+    ],
+    "date": "2026-08-09",
+    "source": "SHPGX上海石油天然气交易所",
+    "url": "https://www.shpgx.com/html/qgjg.html",
+    "regional_url": "https://www.shpgx.com/marketzhishu/map",
+    "_fetch_level": 1
+  },
+  "power_market": [
+    {
+      "title": "8月7日全国用电负荷入夏以来第四次创历史新高",
+      "summary": "据国家能源局消息，8月7日全国用电负荷入夏以来第四次创历史新高，达到15.57亿千瓦，比去年最高峰高出约4900万千瓦，较上一次创新高数值上涨约480万千瓦。华北、东北、华东等6个区域电网21次创历史新高，25个省区市用电负荷累计78次创新高。",
+      "time": "2026-08-08 22:23",
+      "publish_time": "2026-08-08 22:23",
+      "source": "财联社",
+      "url": "https://caifuhao.eastmoney.com/news/20260808222301833645130",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "重要",
+      "display_time": "25小时前"
+    },
+    {
+      "title": "全国用电负荷创新高 电力保供积极应对",
+      "summary": "央视新闻报道，连日来全国出现大范围持续性高温天气，全国用电负荷连创新高，能源电力生产采取有力有效措施确保迎峰度夏平稳有序。7月29日以来全国用电负荷持续高位运行，国家能源局等部门强化统筹调度全力保供。",
+      "time": "2026-08-08 19:00",
+      "publish_time": "2026-08-08 19:00",
+      "source": "央视网",
+      "url": "https://tv.cctv.com/2026/08/08/VIDEsNSGEXV6ZQ8eLBZcT42W260808.shtml",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "重要",
+      "display_time": "28小时前"
+    },
+    {
+      "title": "通知 | 关于2026年7月售电公司注册公示的通知",
+      "summary": "",
+      "time": "2026-08-08 17:34",
+      "publish_time": "2026-08-08 17:34",
+      "source": "广东电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI3NDY4NzE2Ng==&mid=2247521791&idx=1&sn=8b58cca8d436d7bfbcbc48aebb42807c#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "30小时前"
+    },
+    {
+      "title": "通知 | 关于2026年7月虚拟电厂运营商注册公示的通知",
+      "summary": "",
+      "time": "2026-08-08 17:34",
+      "publish_time": "2026-08-08 17:34",
+      "source": "广东电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI3NDY4NzE2Ng==&mid=2247521791&idx=2&sn=e5d5f610615d4bcb91643dd5ebe1fd0b#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "30小时前"
+    },
+    {
+      "title": "通报 | 广东电力现货市场2026年8月运行日报(08.08)",
+      "summary": "",
+      "time": "2026-08-08 17:34",
+      "publish_time": "2026-08-08 17:34",
+      "source": "广东电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI3NDY4NzE2Ng==&mid=2247521791&idx=3&sn=608e0c244d82f5a8486d30c4c49d0b39#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "其他",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "30小时前"
+    },
+    {
+      "title": "能源高质量发展专家谈 | 《新型电力系统建设“十五五”规划》解读（七）",
+      "summary": "",
+      "time": "2026-08-08 12:00",
+      "publish_time": "2026-08-08 12:00",
+      "source": "国家能源局",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIwMTU0MTM4OA==&mid=2652168809&idx=3&sn=d08a794c69fd19d273439f0f72ed276b#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "35小时前"
+    },
+    {
+      "title": "能源高质量发展专家谈 | 《新型电力系统建设“十五五”规划》解读（九）",
+      "summary": "",
+      "time": "2026-08-08 12:00",
+      "publish_time": "2026-08-08 12:00",
+      "source": "国家能源局",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIwMTU0MTM4OA==&mid=2652168809&idx=5&sn=2af4a2f86417a1e88792261ac91683fb#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "35小时前"
+    },
+    {
+      "title": "能源高质量发展专家谈 | 《新型电力系统建设“十五五”规划》解读（五）",
+      "summary": "",
+      "time": "2026-08-08 12:00",
+      "publish_time": "2026-08-08 12:00",
+      "source": "国家能源局",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIwMTU0MTM4OA==&mid=2652168809&idx=1&sn=18d5f7dc1505b8ba014df7478ca8e298#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "35小时前"
+    },
+    {
+      "title": "能源高质量发展专家谈 | 《新型电力系统建设“十五五”规划》解读（八）",
+      "summary": "",
+      "time": "2026-08-08 12:00",
+      "publish_time": "2026-08-08 12:00",
+      "source": "国家能源局",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIwMTU0MTM4OA==&mid=2652168809&idx=4&sn=89cbfbedd400b831fb35cad81a78d00c#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "重要",
+      "display_time": "35小时前"
+    },
+    {
+      "title": "中国新型储能累计装机规模约占全球一半",
+      "summary": "人民日报报道，中国新型储能累计装机规模1.36亿千瓦/3.51亿千瓦时，同比增长84.3%，约占全球一半。2025年迎峰度夏期间全国超20个省级电网负荷创新高，新型储能最大顶峰功率占比超90%，大幅提升电力保供能力。",
+      "time": "2026-08-08 06:00",
+      "publish_time": "2026-08-08 06:00",
+      "source": "人民日报",
+      "url": "http://paper.people.com.cn/rmrbhwb/pc/content/202608/08/content_30173699.html",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "重要",
+      "display_time": "41小时前"
+    },
+    {
+      "title": "《新型电力系统建设“十五五”规划》解读",
+      "summary": "",
+      "time": "2026-08-07 22:36",
+      "publish_time": "2026-08-07 22:36",
+      "source": "北京电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIzNzkwNDM4Mg==&mid=2247500114&idx=1&sn=27c45795d1addd409b90d3d2d06bba97#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "四川中长期外购晚峰电力创新高",
+      "summary": "",
+      "time": "2026-08-07 22:36",
+      "publish_time": "2026-08-07 22:36",
+      "source": "北京电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIzNzkwNDM4Mg==&mid=2247500114&idx=4&sn=0a3dd3d9340fb8aa1edbd22181899aeb#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "数据分析",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "浙江开展全链条电力市场应急实战演练",
+      "summary": "",
+      "time": "2026-08-07 22:36",
+      "publish_time": "2026-08-07 22:36",
+      "source": "北京电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIzNzkwNDM4Mg==&mid=2247500114&idx=5&sn=c32b9993cb61ccdbbe9b63a97c0312ad#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "实务操作",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "湖南7月中长期外售交易电量较去年同期增长359%",
+      "summary": "",
+      "time": "2026-08-07 22:36",
+      "publish_time": "2026-08-07 22:36",
+      "source": "北京电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIzNzkwNDM4Mg==&mid=2247500114&idx=6&sn=afe1794f93cc89dde3e69a7a31c40769#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "其他",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "破百亿！甘肃7月外送电量创单月历史新高",
+      "summary": "",
+      "time": "2026-08-07 22:36",
+      "publish_time": "2026-08-07 22:36",
+      "source": "北京电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzIzNzkwNDM4Mg==&mid=2247500114&idx=3&sn=5ec1d2dff84b5d88ccbed34aca4ceced#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "数据分析",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "绿证交易每周行情一览（2026年第31周）",
+      "summary": "",
+      "time": "2026-08-07 19:21",
+      "publish_time": "2026-08-07 19:21",
+      "source": "广州电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI3NDY5OTA4NA==&mid=2247499985&idx=2&sn=a10737ec4697566d601d6d83d8fb47c5#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "数据分析",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "江苏电力交易中心有限公司关于售电公司2025年度和 2026年一季度信用评价结果的公示",
+      "summary": "",
+      "time": "2026-08-07 19:01",
+      "publish_time": "2026-08-07 19:01",
+      "source": "江苏电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI2MzU0NTAzMQ==&mid=2247500897&idx=1&sn=c81dd40b4e1660c022b389a76e323fd7#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "其他",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "江苏电力市场每日数据聚焦",
+      "summary": "",
+      "time": "2026-08-07 19:01",
+      "publish_time": "2026-08-07 19:01",
+      "source": "江苏电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI2MzU0NTAzMQ==&mid=2247500897&idx=3&sn=95217e4c949dfb34603d2be5258af422#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "数据分析",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "江苏电力市场经营主体注册类业务公示周汇总【2026年7月31日-2026年8月6日】",
+      "summary": "",
+      "time": "2026-08-07 19:01",
+      "publish_time": "2026-08-07 19:01",
+      "source": "江苏电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI2MzU0NTAzMQ==&mid=2247500897&idx=2&sn=eadbf26aac3c458e198b5a529e17918b#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "实务操作",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "河北南部电网2026年8月中旬电网企业代理购电挂牌交易结果的公告",
+      "summary": "",
+      "time": "2026-08-07 17:56",
+      "publish_time": "2026-08-07 17:56",
+      "source": "河北电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzUzMjUyNzM5NQ==&mid=2247504536&idx=1&sn=c615ab64ab83ee5456d158b75d34cdd5#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "行业动态",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "通报 | 广东电力现货市场2026年8月运行日报(08.07)",
+      "summary": "",
+      "time": "2026-08-07 17:51",
+      "publish_time": "2026-08-07 17:51",
+      "source": "广东电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzI3NDY4NzE2Ng==&mid=2247521775&idx=1&sn=53c11c7ca040be92d762124393a5fcf8#rd",
+      "type": "market",
+      "category": "market",
+      "sub_category": "其他",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "经济高质量发展里的“心”与“新” | 积极融入全国统一大市场建设",
+      "summary": "",
+      "time": "2026-08-07 17:18",
+      "publish_time": "2026-08-07 17:18",
+      "source": "国家发改委",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzA3MDE5NjE2Mg==&mid=2650799861&idx=1&sn=6b05601e680f446c5af5f64e2d75d780#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "山东电力交易中心有限公司关于公示山东众安环保科技有限公司等2家售电公司注册信息变更的公告",
+      "summary": "",
+      "time": "2026-08-07 13:50",
+      "publish_time": "2026-08-07 13:50",
+      "source": "山东电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzUxNTUyODYwNQ==&mid=2247494857&idx=2&sn=12e8d4e92813401db45694b278b81015#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "实务操作",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "山东电力交易中心有限公司关于组织2026年9月份零售合同签订的通知",
+      "summary": "",
+      "time": "2026-08-07 13:50",
+      "publish_time": "2026-08-07 13:50",
+      "source": "山东电力交易中心",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzUxNTUyODYwNQ==&mid=2247494857&idx=1&sn=91e4d9cf5b18044c8c40957ce97b98fd#rd",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策解读",
+      "source_type": "ai_search+wechat_channels",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "推进算力设施绿色低碳转型纳入\"十五五\"碳达峰行动方案",
+      "summary": "国务院印发《\"十五五\"碳达峰行动方案》，提出推进算力设施绿色低碳转型，强化算力设施与可再生能源协同布局，支持开展绿电绿证交易提升绿电消费比例。新型电力系统规划也提出统筹能源资源配置与算力设施建设。",
+      "time": "2026-08-07 10:00",
+      "publish_time": "2026-08-07 10:00",
+      "source": "中国环境报",
+      "url": "https://www.cenews.com.cn/news.html?aid=1801667",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策法规",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "新型储能跨入规模化发展新阶段",
+      "summary": "中国能源新闻网报道，2025年全球新增储能装机1.1亿千瓦，中国新增6200万千瓦占全球56%，稳居全球第一大储能市场。中国新型储能发展报告2026显示，过去一年全球能源体系加速转型，储能成为新型电力系统关键支撑。",
+      "time": "2026-08-07 10:00",
+      "publish_time": "2026-08-07 10:00",
+      "source": "中国能源新闻网",
+      "url": "https://www.cpnn.com.cn/news/hy/202608/t20260807_1906997.html",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "2天前"
+    },
+    {
+      "title": "境外新能源项目首次接入我国电力市场",
+      "summary": "老挝水电经中老500千伏联网工程输送至中国粤港澳大湾区，本次送电工作预计持续至10月底，输送总量约6亿千瓦时，相关电量同步参与南方区域电力市场交易。这是境外新能源项目首次接入中国电力市场。",
+      "time": "2026-08-06 15:00",
+      "publish_time": "2026-08-06 15:00",
+      "source": "财联社",
+      "url": "https://finance.sina.com.cn/roll/2026-08-06/doc-inimkncc4615628.shtml",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "3天前"
+    },
+    {
+      "title": "多地着力推动虚拟电厂发展",
+      "summary": "证券时报报道，8月3日发布的《新型电力系统建设\"十五五\"规划》提出大力促进虚拟电厂发展，支持具备条件的地区开展虚拟电厂参与电力市场交易试点，各地政策红利持续释放。",
+      "time": "2026-08-06 08:00",
+      "publish_time": "2026-08-06 08:00",
+      "source": "证券时报",
+      "url": "https://www.stcn.com/article/detail/4060741.html",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策法规",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "3天前"
+    },
+    {
+      "title": "新型电力系统建设迎来\"十五五\"发展路线图",
+      "summary": "央视网报道，规划提出统筹新能源开发与消纳，促进电力与算力协同发展，提高算力设施绿电占比。到2030年初步建成新型电力系统，绿色低碳电力供给格局基本形成。",
+      "time": "2026-08-05 15:00",
+      "publish_time": "2026-08-05 15:00",
+      "source": "央视网",
+      "url": "http://news.cctv.com/2026/08/05/ARTIQeJRWWh4zKy8pDTIsq6r260805.shtml",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策法规",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "4天前"
+    },
+    {
+      "title": "国家能源集团虚拟电厂可调节容量较2025年底增长近一倍",
+      "summary": "截至2026年6月底，国家能源集团12个在运虚拟电厂项目聚合资源容量815.7万千瓦、可调节容量83.9万千瓦，可调节容量相比去年年底实现近一倍增幅。集团正全力推动海南、河南、福建、广西、天津等5个虚拟电厂项目，预计2026年年底前投运。",
+      "time": "2026-08-05 08:00",
+      "publish_time": "2026-08-05 08:00",
+      "source": "国务院国资委",
+      "url": "http://www.sasac.gov.cn/n2588025/n2588124/c35732475/content.html",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "4天前"
+    },
+    {
+      "title": "全国统一电力市场为何南北电价差异显著",
+      "summary": "中国环境报报道，今年4月用电高峰时段，广东电力现货价格最高达到0.978元/千瓦时，同期山东现货价格低至-0.023元/千瓦时。山东4月电力现货市场均价0.330元/千瓦时，负电价累计时长199小时。南北电价差异反映区域供需结构和新能源消纳能力的显著分化。",
+      "time": "2026-08-04 10:00",
+      "publish_time": "2026-08-04 10:00",
+      "source": "中国环境报",
+      "url": "https://res.cenews.com.cn/hjw/news.html?aid=1800760",
+      "type": "market",
+      "category": "market",
+      "sub_category": "市场动态",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "5天前"
+    },
+    {
+      "title": "关于印发《新型电力系统建设\"十五五\"规划》的通知",
+      "summary": "国家发展改革委、国家能源局8月3日联合发布《新型电力系统建设\"十五五\"规划》，提出到2030年初步建成新型电力系统，部署了电力与交通融合、电力与算力协同发展等重点任务，大力促进虚拟电厂发展，科学推进常规水电开发，积极安全有序发展核电。",
+      "time": "2026-08-03 18:00",
+      "publish_time": "2026-08-03 18:00",
+      "source": "国家发展改革委",
+      "url": "https://www.ndrc.gov.cn/xxgk/zcfb/tz/202608/t20260803_1408001.html",
+      "type": "policy",
+      "category": "policy",
+      "sub_category": "政策法规",
+      "source_type": "",
+      "urgency": "历史参考",
+      "display_time": "6天前"
+    }
+  ],
+  "validation_report": {
+    "passed": [
+      "原油: 2 条有效数据",
+      "天然气: 3/3 品种成功",
+      "煤炭: 3 个有效品种",
+      "天气: 10 个有效城市",
+      "LNG: 全国均价 5578.5625 有效",
+      "电力市场: 32 条有效结果"
+    ],
+    "warnings": [],
+    "errors": [],
+    "summary": {
+      "crude": "2/2 entries OK",
+      "gas": "3/3 OK (jkm=21.12, ttf=55.55, henry_hub=2.66)",
+      "coal": "3/3 varieties OK",
+      "weather": "10/10 cities OK",
+      "lng": "OK (national=5578.5625)",
+      "lng_regions": "16 regions",
+      "power_market": "32/32 entries OK"
+    },
+    "overall_score": 100.0
+  }
+}

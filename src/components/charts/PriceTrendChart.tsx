@@ -58,6 +58,15 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
     return { min, max, first, last, change, changePercent };
   }, [chartData]);
 
+  // Y轴域名：基于实际数据范围添加 10% padding，避免离群值拉宽轴范围
+  const yAxisDomain = useMemo(() => {
+    const values = chartData.map((d) => d.price);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const padding = Math.max((max - min) * 0.1, min * 0.02);
+    return [Math.floor(min - padding), Math.ceil(max + padding)];
+  }, [chartData]);
+
   if (chartData.length < 2) return null;
 
   const unitSuffix = series.unit ? ` ${series.unit}` : "";
@@ -131,7 +140,7 @@ export default function PriceTrendChart({ series }: PriceTrendChartProps) {
                 axisLine={{ stroke: "var(--border)" }}
                 tickLine={false}
                 width={65}
-                domain={["auto", "auto"]}
+                domain={[yAxisDomain[0], yAxisDomain[1]]}
               >
                 <Label
                   value={yAxisLabel}

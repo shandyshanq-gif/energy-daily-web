@@ -129,7 +129,7 @@
       "region": "华南",
       "weather": "晴",
       "temp_low": 28,
-      "temp_high": 37,
+      "temp_high": 35,
       "wind": "无持续风",
       "station_id": "58847"
     },
@@ -147,7 +147,7 @@
       "region": "华南",
       "weather": "大雨",
       "temp_low": 24,
-      "temp_high": 30,
+      "temp_high": 35,
       "wind": "无持续风",
       "station_id": "59287"
     },
@@ -156,7 +156,7 @@
       "region": "华南",
       "weather": "中雨",
       "temp_low": 26,
-      "temp_high": 31,
+      "temp_high": 34,
       "wind": "无持续风",
       "station_id": "59758"
     },
@@ -165,7 +165,7 @@
       "region": "华东",
       "weather": "小雨",
       "temp_low": 24,
-      "temp_high": 32,
+      "temp_high": 34,
       "wind": "南风",
       "station_id": "58238"
     },
@@ -174,7 +174,7 @@
       "region": "京津",
       "weather": "多云",
       "temp_low": 22,
-      "temp_high": 31,
+      "temp_high": 28,
       "wind": "东风",
       "station_id": "54511"
     },
@@ -192,7 +192,7 @@
       "region": "华北",
       "weather": "晴",
       "temp_low": 23,
-      "temp_high": 33,
+      "temp_high": 35,
       "wind": "南风",
       "station_id": "53698"
     },
@@ -201,7 +201,7 @@
       "region": "华东",
       "weather": "多云",
       "temp_low": 22,
-      "temp_high": 31,
+      "temp_high": 36,
       "wind": "东北风",
       "station_id": "54823"
     }

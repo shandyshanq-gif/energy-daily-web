@@ -119,49 +119,49 @@
       "city": "北京",
       "weather": "晴",
       "temp_low": 27,
-      "temp_high": 38,
+      "temp_high": 30,
       "wind": "南风"
     },
     {
       "city": "石家庄",
       "weather": "晴",
       "temp_low": 27,
-      "temp_high": 39,
+      "temp_high": 34,
       "wind": "南风"
     },
     {
       "city": "沈阳",
       "weather": "多云",
       "temp_low": 24,
-      "temp_high": 33,
+      "temp_high": 30,
       "wind": "南风"
     },
     {
       "city": "济南",
       "weather": "晴",
       "temp_low": 28,
-      "temp_high": 37,
+      "temp_high": 33,
       "wind": "南风"
     },
     {
       "city": "南京",
       "weather": "多云",
       "temp_low": 29,
-      "temp_high": 36,
+      "temp_high": 29,
       "wind": "东南风"
     },
     {
       "city": "杭州",
       "weather": "晴",
       "temp_low": 30,
-      "temp_high": 40,
+      "temp_high": 35,
       "wind": "南风"
     },
     {
       "city": "福州",
       "weather": "小雨",
       "temp_low": 27,
-      "temp_high": 35,
+      "temp_high": 31,
       "wind": "东北风"
     },
     {
@@ -175,14 +175,14 @@
       "city": "南宁",
       "weather": "小雨",
       "temp_low": 26,
-      "temp_high": 33,
+      "temp_high": 29,
       "wind": "无持续风"
     },
     {
       "city": "海口",
       "weather": "中雨",
       "temp_low": 27,
-      "temp_high": 33,
+      "temp_high": 35,
       "wind": "无持续风"
     }
   ],

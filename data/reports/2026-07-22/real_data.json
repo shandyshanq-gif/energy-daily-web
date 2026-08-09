@@ -119,14 +119,14 @@
       "city": "北京",
       "weather": "晴",
       "temp_low": 27,
-      "temp_high": 38,
+      "temp_high": 27,
       "wind": "南风"
     },
     {
       "city": "石家庄",
       "weather": "晴",
       "temp_low": 27,
-      "temp_high": 39,
+      "temp_high": 32,
       "wind": "南风"
     },
     {
@@ -154,7 +154,7 @@
       "city": "杭州",
       "weather": "晴",
       "temp_low": 30,
-      "temp_high": 40,
+      "temp_high": 34,
       "wind": "南风"
     },
     {
