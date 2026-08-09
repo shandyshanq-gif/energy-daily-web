@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useMemo, useEffect, useDeferredValue } from "react";
 import Link from "next/link";
 import { Search, RotateCw, ArrowLeft } from "lucide-react";
@@ -7,6 +7,11 @@ import type { ReportMeta } from "@/types/report";
 function formatDate(date: string): string {
   const d = new Date(date + "T00:00:00"); // 加 T00:00:00 避免时区偏移
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+}
+
+// 2026-08-08 及之前的日报为历史测试数据，可能有误
+function isHistoricalTestDate(date: string): boolean {
+  return date <= "2026-08-08";
 }
 
 function getYearMonth(date: string): string {
@@ -293,6 +298,18 @@ export default function ReportsPage() {
                             </div>
                             <p className="text-[10px] mt-1.5" style={{ color: "var(--ink-tertiary)" }}>
                               星期{report.weekday}
+                              {isHistoricalTestDate(report.date) && (
+                                <span style={{
+                                  marginLeft: "6px",
+                                  fontSize: "9px",
+                                  color: "var(--ink-tertiary)",
+                                  background: "var(--bg-soft)",
+                                  padding: "1px 5px",
+                                  borderRadius: "2px",
+                                }}>
+                                  历史测试数据，可能有误
+                                </span>
+                              )}
                             </p>
                           </div>
                         </div>

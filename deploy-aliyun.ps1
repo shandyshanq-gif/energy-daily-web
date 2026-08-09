@@ -9,9 +9,13 @@ $REMOTE_DIR = "/var/www/energy-daily-web/out"
 Write-Host "===== 日报 Web 部署开始 =====" -ForegroundColor Cyan
 $startTime = Get-Date
 
-# 1. 本地构建
-Write-Host "[1/4] 本地构建..." -ForegroundColor Yellow
+# 1. 本地构建（清除 .next 缓存避免旧数据残留）
+Write-Host "[1/4] 清除 .next 缓存 + 本地构建..." -ForegroundColor Yellow
 Set-Location $PROJECT_DIR
+if (Test-Path "$PROJECT_DIR\.next") {
+    Remove-Item -Recurse -Force "$PROJECT_DIR\.next"
+    Write-Host ".next 缓存已清除" -ForegroundColor DarkGray
+}
 npm run build
 if ($LASTEXITCODE -ne 0) {
     Write-Host "构建失败" -ForegroundColor Red

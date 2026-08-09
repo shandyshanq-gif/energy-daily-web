@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Archive } from "lucide-react";
 import {
@@ -22,6 +22,11 @@ export async function generateStaticParams() {
   } catch {
     return [];
   }
+}
+
+// 2026-08-08 及之前的日报为历史测试数据，可能有误
+function isHistoricalTestDate(date: string): boolean {
+  return date <= "2026-08-08";
 }
 
 function formatDate(date: string): string {
@@ -529,6 +534,18 @@ export default async function ReportDetailPage({
           </div>
           <div className="text-[11px]" style={{ color: "var(--ink-secondary)" }}>
             {formatDate(date)} 星期{report.meta.weekday}
+            {isHistoricalTestDate(date) && (
+              <span style={{
+                marginLeft: "6px",
+                fontSize: "9px",
+                color: "var(--ink-tertiary)",
+                background: "var(--bg-soft)",
+                padding: "1px 5px",
+                borderRadius: "2px",
+              }}>
+                历史测试数据
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -540,6 +557,18 @@ export default async function ReportDetailPage({
           <h1>一次能源·电力市场联合日报</h1>
           <div className="masthead-meta">
             {formatDate(date)} · 星期{report.meta.weekday}
+            {isHistoricalTestDate(date) && (
+              <span style={{
+                marginLeft: "8px",
+                fontSize: "11px",
+                color: "var(--ink-tertiary)",
+                background: "var(--bg-soft)",
+                padding: "2px 8px",
+                borderRadius: "2px",
+              }}>
+                历史测试数据，可能有误
+              </span>
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-// 历史价格数据提取器 - 从所有日报 Markdown 中提取价格时间序列
+﻿// 历史价格数据提取器 - 从所有日报 Markdown 中提取价格时间序列
 
 import { getAllReports, getReportByDate } from "@/lib/reports";
 import { extractSections, extractPriceTable } from "@/lib/markdown";
@@ -9,6 +9,9 @@ export interface PricePoint {
   unit: string;        // 单位
   name: string;        // 品种名称（归一化后）
 }
+
+// 看板数据展示起始日期：只展示此日期及之后的数据
+export const DASHBOARD_MIN_DATE = '2026-08-09';
 
 export interface PriceSeries {
   name: string;        // 如 "WTI"、"Brent"、"JKM"
@@ -219,6 +222,8 @@ export function getAllPriceSeries(): PriceSeries[] {
   const seriesMap: Record<string, PriceSeries> = {};
 
   for (const reportMeta of allReports) {
+    // 跳过早于看板起始日期的报告
+    if (reportMeta.date < DASHBOARD_MIN_DATE) continue;
     const report = getReportByDate(reportMeta.date);
     if (!report) continue;
 
