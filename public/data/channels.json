@@ -196,5 +196,140 @@
     "level": "C",
     "carrier": "wechat",
     "icon": "📰"
+  },
+  {
+    "title": "国家发改委",
+    "url": "#",
+    "description": "政策发布、电价政策、统一大市场 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "电网头条",
+    "url": "#",
+    "description": "电网运行、电力保供、行业动态 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "中国电力企业管理",
+    "url": "#",
+    "description": "行业管理、电力企业、市场观察 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "A",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "广州电力交易中心",
+    "url": "#",
+    "description": "跨省跨区交易、南方区域市场、交易公告 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "江苏电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "山东电力交易中心",
+    "url": "#",
+    "description": "交易公告、零售合同、市场运行 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "河北电力交易中心",
+    "url": "#",
+    "description": "交易公告、代理购电、市场资格 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "冀北电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "浙江电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "福建电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "海南电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "广西电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "天津电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "辽宁电力交易中心",
+    "url": "#",
+    "description": "交易公告、市场运行、注册公示 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "S",
+    "carrier": "wechat",
+    "icon": "📰"
+  },
+  {
+    "title": "首都电力交易信息",
+    "url": "#",
+    "description": "交易公告、市场信息 · 公众号采集通道",
+    "category": "行业媒体",
+    "level": "B",
+    "carrier": "wechat",
+    "icon": "📰"
   }
 ]
