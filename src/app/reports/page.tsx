@@ -300,14 +300,17 @@ export default function ReportsPage() {
                               星期{report.weekday}
                               {isHistoricalTestDate(report.date) && (
                                 <span style={{
+                                  display: "inline-block",
                                   marginLeft: "6px",
                                   fontSize: "9px",
-                                  color: "var(--ink-tertiary)",
-                                  background: "var(--bg-soft)",
-                                  padding: "1px 5px",
-                                  borderRadius: "2px",
+                                  fontWeight: 600,
+                                  color: "#b8860b",
+                                  background: "#fff8e1",
+                                  border: "1px solid #ffd54f",
+                                  padding: "1px 6px",
+                                  borderRadius: "3px",
                                 }}>
-                                  历史测试数据，可能有误
+                                  ⚠ 历史测试数据
                                 </span>
                               )}
                             </p>

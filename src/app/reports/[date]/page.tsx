@@ -538,12 +538,14 @@ export default async function ReportDetailPage({
               <span style={{
                 marginLeft: "6px",
                 fontSize: "9px",
-                color: "var(--ink-tertiary)",
-                background: "var(--bg-soft)",
-                padding: "1px 5px",
-                borderRadius: "2px",
+                fontWeight: 600,
+                color: "#b8860b",
+                background: "#fff8e1",
+                border: "1px solid #ffd54f",
+                padding: "1px 6px",
+                borderRadius: "3px",
               }}>
-                历史测试数据
+                ⚠ 历史测试数据
               </span>
             )}
           </div>
@@ -559,14 +561,17 @@ export default async function ReportDetailPage({
             {formatDate(date)} · 星期{report.meta.weekday}
             {isHistoricalTestDate(date) && (
               <span style={{
-                marginLeft: "8px",
+                marginLeft: "10px",
                 fontSize: "11px",
-                color: "var(--ink-tertiary)",
-                background: "var(--bg-soft)",
-                padding: "2px 8px",
-                borderRadius: "2px",
+                fontWeight: 600,
+                color: "#b8860b",
+                background: "#fff8e1",
+                border: "1px solid #ffd54f",
+                padding: "3px 10px",
+                borderRadius: "4px",
+                whiteSpace: "nowrap",
               }}>
-                历史测试数据，可能有误
+                ⚠ 历史测试数据，可能有误
               </span>
             )}
           </div>
