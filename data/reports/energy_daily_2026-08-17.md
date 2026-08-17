@@ -1,13 +1,13 @@
 # 📊 一次能源·电力市场联合日报
 > **2026年8月17日 星期一** · 交易员三分钟速览 · 煤油气电 + 负荷天气
-> 数据来源: TradingEconomics / SHPGX / CMA 气象 | 抓取时间: 2026-08-17 10:31
+> 数据来源: TradingEconomics / SHPGX / CMA 气象 | 抓取时间: 2026-08-17 10:50
 
 ---
 ## 🛢️ 原油
 | 品种 | 价格(美元/桶) | 日涨跌 | 月涨跌 | 同比 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:-----|:-------|:------|
-| WTI | **82.82** | ↑ 0.50% | 0.41% | 32.08% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/crude-oil) |
-| Brent | **89.14** | ↑ 0.70% | -0.09% | 33.84% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/brent-crude-oil) |
+| WTI | **82.59** | ↑ 0.23% | 0.13% | 31.72% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/crude-oil) |
+| Brent | **88.88** | ↑ 0.41% | -0.38% | 33.46% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/brent-crude-oil) |
 
 
 ---
@@ -16,8 +16,8 @@
 | 品种 | 价格 | 日涨跌 | 报价日 | 来源 |
 |:-----|----------:|:-------|:-------|:------|
 | JKM | **21.22** 美元/百万英热 | ↑ 0.11% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/liquefied-natural-gas-japan-korea) |
-| TTF | **62.45** 欧元/兆瓦时 | ↑ 1.66% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/eu-natural-gas) |
-| Henry Hub | **2.67** 美元/百万英热 | ↓ -2.48% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/natural-gas) |
+| TTF | **62.3** 欧元/兆瓦时 | ↑ 1.43% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/eu-natural-gas) |
+| Henry Hub | **2.66** 美元/百万英热 | ↓ -2.63% | 2026-08-17 | [TradingEconomics](https://tradingeconomics.com/commodity/natural-gas) |
 
 ### 国内市场
 | 指标 | 数值 | 报价日 | 来源 |
@@ -61,7 +61,7 @@
 
 ---
 ## 🌤️ 核心负荷区天气
-> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-08-17 10:31
+> **数据来源**: 中国气象局（CMA） | **更新时间**: 2026-08-17 10:50
 
 | 城市 | 天气 | 气温(℃) | 风向风力 |
 |:-----|:-----|:--------|:---------|
@@ -108,4 +108,4 @@
 
 ---
 *免责声明：本日报仅提供数据信息与物理逻辑推演，不构成任何业务建议或交易策略。*
-*生成时间：2026-08-17 10:31 · fetch v8.4.1 / report v7.1*
+*生成时间：2026-08-17 10:50 · fetch v8.4.1 / report v7.1*
